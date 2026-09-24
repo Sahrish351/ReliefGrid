@@ -1,124 +1,210 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IMAGES, handleImageError } from '../../config/images';
-import { ShieldAlert, AlertTriangle, CheckSquare, Droplets, Heart, FileText, PhoneCall } from 'lucide-react';
+import {
+  ShieldAlert,
+  AlertTriangle,
+  CheckSquare,
+  Droplets,
+  Heart,
+  FileText,
+  PhoneCall,
+  CheckCircle2,
+  Package,
+  Compass,
+  ArrowRight,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const SafetyCenter: React.FC = () => {
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+
   const EMERGENCY_CONTACTS = [
-    { name: 'Rescue 1122 (Punjab & KP)', phone: '1122' },
-    { name: 'Edhi Ambulance Service', phone: '115' },
-    { name: 'Chhipa Emergency Service', phone: '1020' },
-    { name: 'National Disaster Management (NDMA)', phone: '051-111-157-157' },
-    { name: 'Sindh Emergency Rescue Service', phone: '1122' },
+    { name: 'Rescue 1122 (Punjab & KP)', phone: '1122', note: 'Primary First Response & USAR' },
+    { name: 'Edhi Ambulance Service', phone: '115', note: 'Nationwide Medical & Morgue Transport' },
+    { name: 'Chhipa Emergency Service', phone: '1020', note: 'Emergency Ambulance Fleet' },
+    { name: 'National Disaster Management (NDMA)', phone: '051-111-157-157', note: 'Crisis Operations Center' },
+    { name: 'Sindh Emergency Rescue 1122', phone: '1122', note: 'Urban Fire & Medical Karachi' },
   ];
 
-  const GO_BAG_CHECKLIST = [
-    '3 liters of clean bottled water per person per day',
-    '3-day supply of non-perishable high-energy food rations',
-    'Battery-powered or hand-crank AM/FM emergency radio',
-    'High-intensity LED flashlight and extra AA/AAA batteries',
-    'Comprehensive First Aid Kit with tourniquets and sterile gauze',
-    'Prescription medications, insulin cooling pouch, and inhalers',
-    'Waterproof pouch with CNIC, passport, and property deeds',
-    'Infant formula, sterile baby bottles, and thermal wrap',
-    'Emergency silver thermal survival blankets',
-    'Whistle to signal search and rescue teams in high water',
+  const GO_BAG_ITEMS = [
+    '3 liters of clean bottled drinking water per family member per day (3-day minimum)',
+    'Non-perishable high-protein food rations (dry fruits, biscuits, canned beans)',
+    'Waterproof sealed pouch containing original CNIC, passport, property deeds, and family photos',
+    '72-hour supply of critical prescription medications (insulin cooling pouch, asthma inhalers)',
+    'Compact, well-stocked First Aid Kit (tourniquets, sterile gauze, burn gel, antiseptic)',
+    'Battery-operated or hand-crank AM/FM emergency radio with extra batteries',
+    'High-lumen waterproof LED flashlight and spare rechargeable power bank',
+    'Emergency silver foil thermal space blankets (hypothermia defense in floodwaters)',
+    'High-pitch emergency rescue whistle to signal swiftwater boats through rain',
+    'N95 respirator dust masks for protection against concrete collapse dust & smoke',
   ];
+
+  const toggleCheck = (idx: number) => {
+    setCheckedItems((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  const completedCount = Object.values(checkedItems).filter(Boolean).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="space-y-28 sm:space-y-36 pb-24 overflow-x-hidden">
       
-      {/* Header */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div className="lg:col-span-7 space-y-3">
-          <div className="inline-flex items-center space-x-2 bg-amber-100 text-amber-900 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-            <ShieldAlert className="w-3.5 h-3.5 text-amber-700" />
-            <span>Community Preparedness Center</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-navy-950">
-            Emergency Preparedness &amp; Safety Guidance
-          </h1>
-          <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed">
-            Preparation saves lives before first responders arrive. Review essential go-bag checklists, monsoon flood defense protocols, and verified national emergency hotlines.
-          </p>
-        </div>
-
-        <div className="lg:col-span-5 rounded-2xl overflow-hidden aspect-[16/9] bg-navy-950 shadow-card">
+      {/* 1. CINEMATIC HERO */}
+      <section className="relative min-h-[50vh] flex items-center bg-navy-950 overflow-hidden">
+        <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.communitySafety}
-            alt="Community flood preparedness in Pakistan"
+            src={IMAGES.firstAidKit}
+            alt="Emergency first aid and disaster preparedness kit"
             onError={handleImageError}
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover filter brightness-85"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
-      </div>
 
-      {/* Emergency Hotlines Strip */}
-      <div className="bg-navy-950 text-white rounded-2xl p-6 border border-navy-800 shadow-elevated">
-        <div className="flex items-center space-x-2 mb-4">
-          <PhoneCall className="w-5 h-5 text-emergency-500" />
-          <h3 className="font-bold text-base">Verified National Emergency Contacts</h3>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-3xl space-y-4">
+            <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+              CITIZEN SAFETY CENTER &bull; DISASTER READINESS
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-black font-heading text-white tracking-tight leading-[1.08]">
+              Preparedness Saves Lives Before Responders Arrive.
+            </h1>
+            <p className="text-navy-100 text-lg sm:text-xl font-normal leading-relaxed">
+              When communication lines snap and flash floods crest, immediate personal readiness determines family survival during the critical first 72 hours.
+            </p>
+          </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      </section>
+
+      {/* 2. VERIFIED NATIONAL EMERGENCY CONTACTS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="border-b border-charcoal-200 pb-6 mb-8">
+          <div className="text-xs font-mono font-bold uppercase tracking-widest text-emergency-600 mb-1">
+            IMMEDIATE LIFELINES
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-black font-heading text-navy-950">
+            National Emergency Dispatch Hotlines
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {EMERGENCY_CONTACTS.map((c) => (
-            <div key={c.name} className="bg-navy-900 p-3 rounded-xl border border-navy-800">
-              <div className="text-[11px] text-navy-300 truncate">{c.name}</div>
-              <div className="text-lg font-mono font-extrabold text-amber-400 mt-1">{c.phone}</div>
+            <div
+              key={c.name}
+              className="p-5 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-2"
+            >
+              <div className="text-xs font-bold text-navy-950">{c.name}</div>
+              <div className="text-2xl font-black font-mono text-emergency-600">{c.phone}</div>
+              <div className="text-[11px] text-charcoal-500">{c.note}</div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Go-Bag Checklist & Flood Protocols */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* Go-Bag Checklist */}
-        <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-charcoal-200 shadow-card">
-          <div className="flex items-center space-x-2 mb-4">
-            <CheckSquare className="w-5 h-5 text-green-600" />
-            <h3 className="font-bold text-lg text-navy-950">72-Hour Evacuation Go-Bag Checklist</h3>
-          </div>
-          <p className="text-xs text-charcoal-500 mb-4">
-            Pack these essential items in a lightweight, waterproof backpack placed near the primary exit.
-          </p>
-          <div className="space-y-2.5">
-            {GO_BAG_CHECKLIST.map((item, idx) => (
-              <div key={idx} className="flex items-start space-x-2.5 text-xs text-charcoal-700 bg-charcoal-50 p-2.5 rounded-lg border border-charcoal-100">
-                <span className="font-bold text-navy-900">{idx + 1}.</span>
-                <span>{item}</span>
+      {/* 3. INTERACTIVE 72-HOUR GO-BAG CHECKLIST */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          <div className="lg:col-span-5 space-y-4 sticky top-28">
+            <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600">
+              ESSENTIAL CHECKLIST
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black font-heading text-navy-950 tracking-tight leading-tight">
+              The 72-Hour Evacuation Go-Bag
+            </h2>
+            <p className="text-charcoal-600 text-sm leading-relaxed">
+              Every household in flood, seismic, and urban hazard zones should keep a pre-packed, waterproof backpack ready by the primary exit door.
+            </p>
+
+            <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+              <div className="text-xs font-bold text-emerald-900">Your Readiness Progress</div>
+              <div className="text-2xl font-black text-emerald-700 font-mono">
+                {completedCount} / {GO_BAG_ITEMS.length} Packed
               </div>
-            ))}
+              <div className="w-full bg-emerald-200 h-2 rounded-full overflow-hidden mt-1">
+                <div
+                  className="bg-emerald-600 h-full transition-all duration-300"
+                  style={{ width: `${(completedCount / GO_BAG_ITEMS.length) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 space-y-3">
+            {GO_BAG_ITEMS.map((item, idx) => {
+              const isChecked = !!checkedItems[idx];
+              return (
+                <button
+                  key={idx}
+                  onClick={() => toggleCheck(idx)}
+                  className={`w-full p-4 rounded-xl border text-left flex items-start space-x-3 transition-all ${
+                    isChecked
+                      ? 'bg-emerald-50/60 border-emerald-300 text-emerald-950'
+                      : 'bg-white border-charcoal-200 text-charcoal-800 hover:border-charcoal-300'
+                  }`}
+                >
+                  <div className="mt-0.5 flex-shrink-0">
+                    {isChecked ? (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                    ) : (
+                      <div className="w-5 h-5 rounded border-2 border-charcoal-300"></div>
+                    )}
+                  </div>
+                  <span className={`text-xs sm:text-sm ${isChecked ? 'line-through opacity-75' : ''}`}>
+                    {item}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. EVACUATION GUIDANCE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="border-t border-charcoal-200 pt-16">
+          <div className="max-w-2xl mb-12">
+            <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-1">
+              STEP-BY-STEP DRILLS
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black font-heading text-navy-950 tracking-tight">
+              Standard Evacuation Protocols
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-navy-900 text-white flex items-center justify-center font-bold text-sm">
+                01
+              </div>
+              <h3 className="text-base font-bold text-navy-950">Prioritize Vulnerable Family</h3>
+              <p className="text-xs text-charcoal-600 leading-relaxed">
+                Assign a dedicated adult guardian to infants, toddlers, and bedridden elders. Ensure life jackets or flotation rings are donned before water enters the home.
+              </p>
+            </div>
+
+            <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-navy-900 text-white flex items-center justify-center font-bold text-sm">
+                02
+              </div>
+              <h3 className="text-base font-bold text-navy-950">Isolate Home Hazards</h3>
+              <p className="text-xs text-charcoal-600 leading-relaxed">
+                Shut off primary gas valves and electrical circuit breakers. Unsecured gas cylinders in floodwater can rupture or create floating explosion hazards.
+              </p>
+            </div>
+
+            <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-navy-900 text-white flex items-center justify-center font-bold text-sm">
+                03
+              </div>
+              <h3 className="text-base font-bold text-navy-950">Move to Verified Shelters</h3>
+              <p className="text-xs text-charcoal-600 leading-relaxed">
+                Do not seek refuge in makeshift roadside camps. Check RELIEFGRID&apos;s live shelter directory to confirm open bed capacity, potable water, and medical presence.
+              </p>
+            </div>
           </div>
         </div>
-
-        {/* Flood Preparedness Step-by-Step */}
-        <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-charcoal-200 shadow-card space-y-4">
-          <div className="flex items-center space-x-2 mb-1">
-            <Droplets className="w-5 h-5 text-blue-600" />
-            <h3 className="font-bold text-lg text-navy-950">River Basin &amp; Urban Flood Safety</h3>
-          </div>
-          <p className="text-xs text-charcoal-500">
-            Vital measures when water levels rise along Ravi, Indus, or Nullah Lai.
-          </p>
-
-          <div className="space-y-3 text-xs text-charcoal-700">
-            <div className="bg-charcoal-50 p-3.5 rounded-xl border border-charcoal-100">
-              <strong className="text-navy-950 block mb-1">Before Water Reaches Your Threshold:</strong>
-              Move electronics, vital medicines, and documents to upper levels. Sandbag entrance ways if available. Unplug all major electrical appliances.
-            </div>
-
-            <div className="bg-charcoal-50 p-3.5 rounded-xl border border-charcoal-100">
-              <strong className="text-navy-950 block mb-1">During Active Inundation:</strong>
-              Do not walk through flowing water. Just 6 inches of fast water can knock an adult off balance. If trapped in a building, climb to the roof; do not hide in closed attics without roof exits.
-            </div>
-
-            <div className="bg-charcoal-50 p-3.5 rounded-xl border border-charcoal-100">
-              <strong className="text-navy-950 block mb-1">After Flood Recedes:</strong>
-              Avoid standing pools of water due to electrocution from downed cables. Disinfect all contaminated water tanks and boil tap water for 10 minutes before consumption.
-            </div>
-          </div>
-        </div>
-
-      </div>
+      </section>
 
     </div>
   );

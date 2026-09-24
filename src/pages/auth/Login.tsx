@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, ArrowRight, ShieldCheck, Radio, Sparkles } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../types';
+import { IMAGES, handleImageError } from '../../config/images';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export const Login: React.FC = () => {
     await login(email, selectedRole);
     setIsLoading(false);
 
-    // Redirect to corresponding portal
+    // Redirect to corresponding role portal
     if (selectedRole === 'emergency_coordinator') navigate('/command');
     else if (selectedRole === 'citizen') navigate('/app');
     else if (selectedRole === 'responder') navigate('/responder');
@@ -30,83 +31,131 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
-      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-charcoal-200 shadow-elevated max-w-md w-full space-y-6">
-        
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-navy-900 text-white flex items-center justify-center mx-auto shadow-card">
-            <Lock className="w-6 h-6 text-white" />
+    <div className="min-h-[85vh] flex items-stretch">
+      
+      {/* Left Column: Authentic Humanitarian Photography (Editorial Split) */}
+      <div className="hidden lg:block lg:w-1/2 relative bg-navy-950 overflow-hidden">
+        <img
+          src={IMAGES.commandCenter}
+          alt="Emergency coordinator command center"
+          onError={handleImageError}
+          className="w-full h-full object-cover filter brightness-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/60 to-transparent"></div>
+
+        <div className="absolute bottom-12 left-12 right-12 text-white space-y-4">
+          <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>AUTHORIZED ACCESS PORTAL</span>
           </div>
-          <h1 className="text-2xl font-bold font-heading text-navy-950">Welcome to RELIEFGRID</h1>
-          <p className="text-xs text-charcoal-500">Sign in to access your designated operational portal.</p>
+          <h2 className="text-3xl font-black font-heading tracking-tight leading-tight">
+            One Unified Operating System for Disaster Coordination.
+          </h2>
+          <p className="text-navy-200 text-xs sm:text-sm leading-relaxed max-w-md">
+            Connecting emergency coordinators, rescue boat squads, hospital trauma centers, and shelter hubs across Pakistan under strict human-in-the-loop governance.
+          </p>
+          <div className="pt-2 flex items-center space-x-4 text-[11px] text-navy-300 font-mono">
+            <span>&bull; Role-Based Access Control</span>
+            <span>&bull; 256-Bit Transport Encryption</span>
+          </div>
         </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          <div>
-            <label className="block font-semibold text-charcoal-700 mb-1">Select Active Role Profile</label>
-            <select
-              value={selectedRole}
-              onChange={(e: any) => setSelectedRole(e.target.value)}
-              className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-2.5 text-xs font-semibold text-navy-950"
-            >
-              <option value="emergency_coordinator">Emergency Coordinator (Command Center)</option>
-              <option value="citizen">Citizen (Help &amp; Tracking)</option>
-              <option value="responder">Rescue Responder (Field Missions)</option>
-              <option value="hospital_staff">Hospital Staff (Trauma Reception)</option>
-              <option value="shelter_manager">Shelter Manager (Intake &amp; Supplies)</option>
-              <option value="organization_admin">NGO / Logistics Admin</option>
-              <option value="volunteer">Volunteer (Community Corps)</option>
-              <option value="super_admin">Super Administrator</option>
-            </select>
+      {/* Right Column: Clean Authentication Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-16 bg-white">
+        <div className="max-w-md w-full space-y-8">
+          
+          <div className="space-y-2">
+            <Link to="/" className="inline-flex items-center space-x-2 mb-2">
+              <span className="font-heading font-black text-2xl text-navy-950 tracking-tight">RELIEFGRID</span>
+              <span className="text-[10px] font-extrabold bg-emergency-600 text-white px-2 py-0.5 rounded tracking-widest uppercase">
+                AI
+              </span>
+            </Link>
+            <h1 className="text-3xl font-black font-heading text-navy-950 tracking-tight">
+              Sign In to Your Portal
+            </h1>
+            <p className="text-xs sm:text-sm text-charcoal-600">
+              Select your simulated role profile to access corresponding operations.
+            </p>
           </div>
 
-          <div>
-            <label className="block font-semibold text-charcoal-700 mb-1">Email Address</label>
-            <div className="relative">
-              <Mail className="w-4 h-4 text-charcoal-400 absolute left-3 top-3" />
+          <form onSubmit={handleSubmit} className="space-y-5 text-xs">
+            <div>
+              <label className="block font-bold text-navy-950 uppercase tracking-wider text-[11px] mb-1.5">
+                Active Operational Role Profile
+              </label>
+              <select
+                value={selectedRole}
+                onChange={(e: any) => setSelectedRole(e.target.value)}
+                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-navy-950 focus:outline-none focus:border-navy-950"
+              >
+                <option value="emergency_coordinator">Emergency Coordinator (Command Center)</option>
+                <option value="citizen">Citizen (Help Request &amp; Live Tracking)</option>
+                <option value="responder">Rescue Responder (Field Missions &amp; GPS)</option>
+                <option value="hospital_staff">Hospital Staff (Trauma ICU &amp; Pre-Alerts)</option>
+                <option value="shelter_manager">Shelter Manager (Beds &amp; Supplies)</option>
+                <option value="organization_admin">NGO Relief Administrator (Logistics Hub)</option>
+                <option value="volunteer">Community Volunteer (Field Tasks)</option>
+                <option value="super_admin">Super Administrator (Governance)</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block font-bold text-navy-950 uppercase tracking-wider text-[11px] mb-1.5">
+                Operational Email
+              </label>
               <input
                 type="email"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl py-2.5 pl-9 pr-3 text-xs"
+                required
+                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-3 text-xs sm:text-sm text-navy-950 focus:outline-none focus:border-navy-950"
               />
             </div>
-          </div>
 
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="font-semibold text-charcoal-700">Password</label>
-              <Link to="/forgot-password" className="text-navy-700 hover:underline">Forgot password?</Link>
-            </div>
-            <div className="relative">
-              <Lock className="w-4 h-4 text-charcoal-400 absolute left-3 top-3" />
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="font-bold text-navy-950 uppercase tracking-wider text-[11px]">
+                  Password
+                </label>
+                <Link to="/forgot-password" className="text-xs text-emergency-600 hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
               <input
                 type="password"
-                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl py-2.5 pl-9 pr-3 text-xs"
+                required
+                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-3 text-xs sm:text-sm text-navy-950 focus:outline-none focus:border-navy-950"
               />
             </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-navy-950 hover:bg-navy-900 active:scale-95 text-white font-extrabold py-3.5 rounded-xl text-sm shadow-card flex items-center justify-center space-x-2 transition-all disabled:opacity-50"
+            >
+              <span>{isLoading ? 'Authenticating Profile...' : 'Enter Operational Portal'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+
+          <div className="pt-4 border-t border-charcoal-100 flex items-center justify-between text-xs text-charcoal-600">
+            <span>Need a new organization profile?</span>
+            <Link to="/register" className="font-bold text-navy-950 hover:text-emergency-600">
+              Register Account &rarr;
+            </Link>
           </div>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-navy-950 hover:bg-navy-900 text-white font-bold py-3.5 rounded-xl text-xs transition-all shadow-card flex items-center justify-center space-x-2"
-          >
-            <span>{isLoading ? 'Authenticating...' : 'Sign In to Portal'}</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </form>
+          <div className="bg-charcoal-50 p-3 rounded-xl border border-charcoal-200 text-[11px] text-charcoal-500 font-mono text-center">
+            DEMONSTRATION ACCESS &bull; PASSWORDS PRE-FILLED FOR CONVENIENCE
+          </div>
 
-        <div className="text-center text-xs text-charcoal-500 pt-2 border-t border-charcoal-100">
-          <span>Don't have an account? </span>
-          <Link to="/register" className="text-navy-900 font-bold hover:underline">Create Account</Link>
         </div>
-
       </div>
+
     </div>
   );
 };

@@ -240,3 +240,4 @@ export const OperationalMap: React.FC<OperationalMapProps> = ({
     </div>
   );
 };
+

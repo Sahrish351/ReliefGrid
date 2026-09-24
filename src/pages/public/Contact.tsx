@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, CheckCircle2, Send } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  CheckCircle2,
+  Send,
+  ShieldAlert,
+  Radio,
+  Clock,
+  Building2,
+  ArrowRight,
+} from 'lucide-react';
+import { IMAGES, handleImageError } from '../../config/images';
+import { Link } from 'react-router-dom';
 
 export const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -13,96 +26,193 @@ export const Contact: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="space-y-28 sm:space-y-36 pb-24 overflow-x-hidden">
       
-      <div className="max-w-3xl">
-        <span className="text-xs font-bold uppercase tracking-wider text-navy-600">Regional Coordination</span>
-        <h1 className="text-3xl sm:text-5xl font-extrabold font-heading text-navy-950 mt-1">
-          Contact Regional Emergency Desks
-        </h1>
-        <p className="text-charcoal-600 text-sm sm:text-base mt-2">
-          Connect with regional humanitarian liaison officers, logistics coordinators, and technical engineering staff.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* Contact Form */}
-        <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-charcoal-200 shadow-card">
-          {submitted ? (
-            <div className="text-center py-10 space-y-3">
-              <CheckCircle2 className="w-12 h-12 text-green-600 mx-auto" />
-              <h3 className="text-xl font-bold text-navy-950">Inquiry Dispatched</h3>
-              <p className="text-xs text-charcoal-600 max-w-sm mx-auto">
-                Your message has been assigned to the designated provincial liaison officer.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
-              <h3 className="font-bold text-base text-navy-950">Send an Inquiry or Liaison Request</h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-charcoal-700 mb-1">Your Full Name</label>
-                  <input type="text" required placeholder="Name" className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-2.5 text-xs" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-charcoal-700 mb-1">Organization / Agency</label>
-                  <input type="text" placeholder="e.g. Red Crescent / Edhi / Rescue" className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-2.5 text-xs" />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-charcoal-700 mb-1">Email Address</label>
-                <input type="email" required placeholder="email@example.org" className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-2.5 text-xs" />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-charcoal-700 mb-1">Subject / Region</label>
-                <select className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-2.5 text-xs font-medium">
-                  <option>Lahore Sector (Ravi Floodway)</option>
-                  <option>Karachi Coastal &amp; Urban Floods</option>
-                  <option>Rawalpindi Nullah Lai Basin</option>
-                  <option>Islamabad Federal Coordination</option>
-                  <option>Multan Chenab Embankment</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-charcoal-700 mb-1">Message</label>
-                <textarea rows={4} required placeholder="State your inquiry..." className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-2.5 text-xs resize-none" />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-navy-950 hover:bg-navy-900 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center space-x-2"
-              >
-                <Send className="w-4 h-4" />
-                <span>Send Regional Message</span>
-              </button>
-            </form>
-          )}
+      {/* 1. CINEMATIC HERO */}
+      <section className="relative min-h-[50vh] flex items-center bg-navy-950 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={IMAGES.heroTeamwork}
+            alt="Humanitarian coordination liaison desks"
+            onError={handleImageError}
+            className="w-full h-full object-cover filter brightness-85"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        {/* Regional Desks List */}
-        <div className="lg:col-span-5 space-y-3">
-          <h3 className="font-bold text-base text-navy-950">Provincial Emergency Operations Centers</h3>
-          {DESKS.map((d) => (
-            <div key={d.city} className="bg-white p-4 rounded-xl border border-charcoal-200 shadow-xs space-y-1">
-              <div className="font-bold text-xs text-navy-950">{d.city}</div>
-              <div className="text-[11px] text-charcoal-500 flex items-center space-x-1.5">
-                <MapPin className="w-3.5 h-3.5 text-charcoal-400 flex-shrink-0" />
-                <span>{d.location}</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-3xl space-y-4">
+            <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+              OPERATIONAL LIAISON &bull; CONTACT DESKS
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-black font-heading text-white tracking-tight leading-[1.08]">
+              Contact Regional Emergency Desks.
+            </h1>
+            <p className="text-navy-100 text-lg sm:text-xl font-normal leading-relaxed">
+              Connect with regional humanitarian liaison officers, medical logistics coordinators, and technical engineering staff across Pakistan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. IMMEDIATE EMERGENCY CALLOUT */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-5 rounded-2xl bg-emergency-50 border border-emergency-300 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center space-x-3">
+            <ShieldAlert className="w-6 h-6 text-emergency-600 flex-shrink-0" />
+            <div>
+              <div className="font-bold text-sm text-emergency-950">
+                Are you in immediate life-threatening danger?
               </div>
-              <div className="text-[11px] font-mono text-navy-900 font-bold flex items-center space-x-1.5 pt-1">
-                <Phone className="w-3.5 h-3.5 text-navy-600 flex-shrink-0" />
-                <span>{d.phone}</span>
+              <div className="text-xs text-emergency-800">
+                Do not submit this contact form. Dial emergency services directly for immediate watercraft or medical extraction.
               </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-      </div>
+          <div className="flex items-center space-x-3">
+            <a
+              href="tel:1122"
+              className="bg-emergency-600 text-white font-black px-4 py-2 rounded-xl text-xs shadow-card hover:bg-emergency-700"
+            >
+              Call Rescue 1122
+            </a>
+            <a
+              href="tel:115"
+              className="bg-white text-navy-950 border border-charcoal-300 font-bold px-4 py-2 rounded-xl text-xs hover:bg-charcoal-50"
+            >
+              Call Edhi 115
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. CONTACT FORM & LOCATIONS SPLIT */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          
+          {/* Left: Contact Form */}
+          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-charcoal-200 shadow-card">
+            {submitted ? (
+              <div className="text-center py-16 space-y-4">
+                <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
+                <h3 className="text-2xl font-bold text-navy-950">Inquiry Dispatched</h3>
+                <p className="text-xs sm:text-sm text-charcoal-600 max-w-sm mx-auto leading-relaxed">
+                  Your message has been assigned to the designated provincial liaison desk. You will receive an operational response within 4 hours.
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="bg-navy-950 text-white font-bold px-6 py-2.5 rounded-xl text-xs hover:bg-navy-900"
+                >
+                  Send Another Inquiry
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-5">
+                <div>
+                  <h3 className="text-xl font-bold text-navy-950">Send an Operational Liaison Request</h3>
+                  <p className="text-xs text-charcoal-500 mt-1">For agency integration, NGO relief logistics, or academic inquiries.</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-charcoal-700">Full Name</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Dr. Tariq Mansoor"
+                      className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-navy-900 text-navy-950"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-charcoal-700">Agency / Organization</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Red Crescent / Edhi Foundation"
+                      className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-navy-900 text-navy-950"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-charcoal-700">Official Email</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="liaison@agency.org"
+                      className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-navy-900 text-navy-950"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-charcoal-700">Contact Phone</label>
+                    <input
+                      type="tel"
+                      placeholder="+92 300 0000000"
+                      className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-navy-900 text-navy-950"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-charcoal-700">Inquiry Description</label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Provide details regarding agency coordination, warehouse logistics, or clinical telemetry integration..."
+                    className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-navy-900 text-navy-950 resize-none"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-navy-950 hover:bg-navy-900 text-white font-bold py-3.5 rounded-xl text-sm shadow-card flex items-center justify-center space-x-2 transition-all active:scale-95"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Transmit Liaison Message</span>
+                </button>
+              </form>
+            )}
+          </div>
+
+          {/* Right: Regional Desks */}
+          <div className="lg:col-span-5 space-y-6">
+            <div>
+              <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-1">
+                PHYSICAL HUBS
+              </div>
+              <h3 className="text-2xl font-bold font-heading text-navy-950">
+                Provincial Operations Desks
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {DESKS.map((d) => (
+                <div key={d.city} className="p-4 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+                  <div className="font-bold text-sm text-navy-950">{d.city}</div>
+                  <div className="text-xs text-charcoal-600 flex items-center space-x-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-emergency-600 flex-shrink-0" />
+                    <span>{d.location}</span>
+                  </div>
+                  <div className="text-xs text-charcoal-500 font-mono pt-1">
+                    Hotline: <strong className="text-navy-950">{d.phone}</strong>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-5 bg-navy-950 text-white rounded-2xl space-y-2">
+              <div className="text-xs font-mono font-bold uppercase text-emerald-400">
+                OPERATIONAL TIMINGS
+              </div>
+              <div className="text-xs text-navy-200">
+                Emergency dispatch and Gemini orchestration run 24 hours a day, 7 days a week. Administrative inquiry desks operate Mon–Sat 08:00 to 18:00 PKT.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
 
     </div>
   );

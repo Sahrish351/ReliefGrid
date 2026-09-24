@@ -148,6 +148,7 @@ export interface Resource {
   organization_id?: string;
   name: string;
   resource_type: ResourceType;
+  type?: ResourceType;
   capability: string;
   status: ResourceStatus;
   capacity: number;
@@ -169,8 +170,13 @@ export interface Hospital {
   emergency_capacity: number;
   available_beds: number;
   icu_beds: number;
+  icu_available?: number;
   ventilators: number;
+  ventilators_available?: number;
   blood_units: number;
+  blood_units_available?: number;
+  trauma_level?: string;
+  contact_phone?: string;
   emergency_status: 'normal' | 'moderate_pressure' | 'high_pressure' | 'critical_capacity';
   capabilities: string[];
   updated_at: string;
@@ -185,13 +191,18 @@ export interface Shelter {
   latitude: number;
   longitude: number;
   total_capacity: number;
+  capacity?: number;
   current_occupancy: number;
   food_hours_remaining: number;
   water_hours_remaining: number;
+  food_supply_days?: number;
+  water_supply_liters?: number;
   medical_support: boolean;
+  medical_station?: boolean;
   accessibility_support: boolean;
   family_area: boolean;
   children_area: boolean;
+  power_backup?: boolean;
   status: 'open' | 'near_capacity' | 'full' | 'closed';
   updated_at: string;
 }

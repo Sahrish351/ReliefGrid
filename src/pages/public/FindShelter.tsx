@@ -1,5 +1,22 @@
 import React, { useState } from 'react';
-import { Building2, MapPin, Users, Droplets, Utensils, HeartPulse, Check, Filter, Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import {
+  Building2,
+  MapPin,
+  Users,
+  Droplets,
+  Utensils,
+  HeartPulse,
+  Check,
+  Filter,
+  Search,
+  CheckCircle2,
+  ArrowRight,
+  ShieldCheck,
+  AlertTriangle,
+  Compass,
+} from 'lucide-react';
+import { IMAGES, handleImageError } from '../../config/images';
 import { useData } from '../../context/DataContext';
 
 export const FindShelter: React.FC = () => {
@@ -7,164 +24,234 @@ export const FindShelter: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [familyOnly, setFamilyOnly] = useState<boolean>(false);
+  const [medicalOnly, setMedicalOnly] = useState<boolean>(false);
 
   const filteredShelters = shelters.filter((s) => {
     if (selectedCity !== 'All' && s.city !== selectedCity) return false;
     if (familyOnly && !s.family_area) return false;
-    if (searchQuery && !s.name.toLowerCase().includes(searchQuery.toLowerCase()) && !s.location.toLowerCase().includes(searchQuery.toLowerCase())) {
+    if (medicalOnly && !s.medical_support && !s.medical_station) return false;
+    if (
+      searchQuery &&
+      !s.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      !s.location.toLowerCase().includes(searchQuery.toLowerCase())
+    ) {
       return false;
     }
     return true;
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="space-y-28 sm:space-y-36 pb-24 overflow-x-hidden">
       
-      {/* Header */}
-      <div className="max-w-2xl">
-        <div className="inline-flex items-center space-x-2 bg-purple-100 text-purple-900 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
-          <Building2 className="w-3.5 h-3.5 text-purple-700" />
-          <span>Shelter &amp; Evacuation Network</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-navy-950">
-          Find Safe Evacuation Shelters
-        </h1>
-        <p className="text-charcoal-600 text-sm mt-2">
-          Real-time shelter capacity, remaining drinking water, food hours, and accessibility accommodations across Pakistan.
-        </p>
-      </div>
-
-      {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-charcoal-200 shadow-card flex flex-wrap items-center justify-between gap-4">
-        
-        <div className="flex items-center space-x-2 flex-1 min-w-[240px]">
-          <Search className="w-4 h-4 text-charcoal-400" />
-          <input
-            type="text"
-            placeholder="Search by shelter name or locality..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs bg-transparent focus:outline-none text-charcoal-800"
+      {/* 1. CINEMATIC HERO */}
+      <section className="relative min-h-[50vh] flex items-center bg-navy-950 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={IMAGES.shelterCommunity}
+            alt="Evacuation shelter community in Pakistan"
+            onError={handleImageError}
+            className="w-full h-full object-cover filter brightness-85"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center space-x-1.5 text-xs">
-            <span className="text-charcoal-500 font-semibold">City:</span>
-            {['All', 'Lahore', 'Karachi', 'Rawalpindi', 'Islamabad', 'Multan'].map((c) => (
-              <button
-                key={c}
-                onClick={() => setSelectedCity(c)}
-                className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${
-                  selectedCity === c ? 'bg-navy-900 text-white' : 'bg-charcoal-100 hover:bg-charcoal-200 text-charcoal-700'
-                }`}
-              >
-                {c}
-              </button>
-            ))}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-3xl space-y-4">
+            <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+              SAFE HARBOR DIRECTORY &bull; LIVE CAPACITY
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-black font-heading text-white tracking-tight leading-[1.08]">
+              Find Verified Safe Evacuation Shelters.
+            </h1>
+            <p className="text-navy-100 text-lg sm:text-xl font-normal leading-relaxed">
+              Real-time shelter bed counts, clean drinking water reserves, food ration caches, and dedicated family quarters across Pakistan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. SEARCH & FILTER CONSOLE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white border border-charcoal-200 rounded-2xl p-5 shadow-card space-y-4">
+          
+          <div className="flex flex-col lg:flex-row items-center gap-4">
+            {/* Search Input */}
+            <div className="flex items-center space-x-3 w-full lg:w-96 bg-charcoal-50 px-4 py-3 rounded-xl border border-charcoal-200">
+              <Search className="w-5 h-5 text-charcoal-400 flex-shrink-0" />
+              <input
+                type="text"
+                placeholder="Search by shelter name, zone, or street..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full text-xs sm:text-sm bg-transparent focus:outline-none text-navy-950"
+              />
+            </div>
+
+            {/* City Filter Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 w-full lg:w-auto">
+              {['All', 'Lahore', 'Karachi', 'Rawalpindi', 'Islamabad', 'Multan'].map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setSelectedCity(c)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    selectedCity === c
+                      ? 'bg-navy-950 text-white shadow-sm'
+                      : 'bg-charcoal-100 text-charcoal-700 hover:text-navy-950'
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+
+            {/* Checkbox Toggles */}
+            <div className="flex items-center space-x-4 w-full lg:w-auto text-xs font-semibold text-charcoal-700">
+              <label className="flex items-center space-x-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={familyOnly}
+                  onChange={(e) => setFamilyOnly(e.target.checked)}
+                  className="rounded text-navy-900 focus:ring-0"
+                />
+                <span>Family Quarters Only</span>
+              </label>
+
+              <label className="flex items-center space-x-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={medicalOnly}
+                  onChange={(e) => setMedicalOnly(e.target.checked)}
+                  className="rounded text-navy-900 focus:ring-0"
+                />
+                <span>On-Site Medical Station</span>
+              </label>
+            </div>
           </div>
 
-          <label className="flex items-center space-x-2 text-xs font-medium text-charcoal-700 cursor-pointer pl-2 border-l border-charcoal-200">
-            <input
-              type="checkbox"
-              checked={familyOnly}
-              onChange={(e) => setFamilyOnly(e.target.checked)}
-              className="rounded text-navy-900 focus:ring-navy-900"
-            />
-            <span>Family / Infant Areas Only</span>
-          </label>
+          <div className="flex items-center justify-between text-xs text-charcoal-500 pt-2 border-t border-charcoal-100 font-mono">
+            <span>Showing {filteredShelters.length} verified shelters</span>
+            <span>Synthetic demo telemetry &bull; Capacity refreshed every 15s</span>
+          </div>
+
         </div>
+      </section>
 
-      </div>
+      {/* 3. SHELTER CARDS (Rich, Visual, Not a Database Table) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredShelters.map((s) => {
+            const totalCap = s.total_capacity || s.capacity || 200;
+            const freeSlots = Math.max(0, totalCap - s.current_occupancy);
+            const occupancyPct = Math.round((s.current_occupancy / totalCap) * 100);
+            const isFull = occupancyPct >= 95;
+            const waterAmt = s.water_supply_liters || (s.water_hours_remaining ? s.water_hours_remaining * 25 : 1200);
+            const foodDays = s.food_supply_days || (s.food_hours_remaining ? Math.round(s.food_hours_remaining / 24) : 5);
 
-      {/* Shelters Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredShelters.map((shelter) => {
-          const occupancyRate = Math.round((shelter.current_occupancy / shelter.total_capacity) * 100);
-          const isNearCap = occupancyRate >= 80;
+            return (
+              <div
+                key={s.id}
+                className="bg-white border border-charcoal-200 rounded-3xl overflow-hidden shadow-card hover:shadow-elevated transition-all flex flex-col justify-between"
+              >
+                <div>
+                  {/* Photo Banner */}
+                  <div className="relative h-44 overflow-hidden bg-navy-950">
+                    <img
+                      src={IMAGES.shelterInterior}
+                      alt={s.name}
+                      onError={handleImageError}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
 
-          return (
-            <div
-              key={shelter.id}
-              className="bg-white rounded-2xl border border-charcoal-200 shadow-card p-6 flex flex-col justify-between hover:shadow-elevated transition-all"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-bold text-navy-700 bg-navy-50 px-2 py-0.5 rounded">
-                    {shelter.city}
-                  </span>
-                  <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${
-                    shelter.status === 'open' ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'
-                  }`}>
-                    {shelter.status.replace('_', ' ')}
-                  </span>
-                </div>
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-navy-950/80 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded">
+                        {s.city}
+                      </span>
+                    </div>
 
-                <h3 className="font-bold text-base text-navy-950 mb-1">{shelter.name}</h3>
-                <div className="flex items-center space-x-1.5 text-xs text-charcoal-500 mb-4">
-                  <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-charcoal-400" />
-                  <span className="truncate">{shelter.location}</span>
-                </div>
-
-                {/* Capacity Progress Bar */}
-                <div className="space-y-1.5 mb-5 bg-charcoal-50 p-3 rounded-xl border border-charcoal-100">
-                  <div className="flex justify-between text-xs font-semibold text-charcoal-700">
-                    <span>Occupancy</span>
-                    <span>{shelter.current_occupancy} / {shelter.total_capacity} ({occupancyRate}%)</span>
-                  </div>
-                  <div className="w-full h-2.5 bg-charcoal-200 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all ${
-                        isNearCap ? 'bg-amber-500' : 'bg-green-600'
-                      }`}
-                      style={{ width: `${occupancyRate}%` }}
-                    ></div>
-                  </div>
-                  <div className="text-[10px] text-charcoal-500 text-right">
-                    {shelter.total_capacity - shelter.current_occupancy} available spots
-                  </div>
-                </div>
-
-                {/* Supplies Gauges */}
-                <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-                  <div className="bg-charcoal-50 p-2.5 rounded-xl border border-charcoal-100 flex items-center space-x-2">
-                    <Droplets className="w-4 h-4 text-blue-500 flex-shrink-0" />
-                    <div>
-                      <div className="text-[10px] text-charcoal-400">Drinking Water</div>
-                      <div className="font-bold text-charcoal-800">{shelter.water_hours_remaining} Hours</div>
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-mono">
+                      <span>{s.status.toUpperCase()}</span>
+                      <span className={freeSlots > 20 ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+                        {freeSlots} Spaces Open
+                      </span>
                     </div>
                   </div>
 
-                  <div className="bg-charcoal-50 p-2.5 rounded-xl border border-charcoal-100 flex items-center space-x-2">
-                    <Utensils className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                  {/* Body Content */}
+                  <div className="p-6 space-y-4">
                     <div>
-                      <div className="text-[10px] text-charcoal-400">Food Rations</div>
-                      <div className="font-bold text-charcoal-800">{shelter.food_hours_remaining} Hours</div>
+                      <h3 className="text-xl font-bold font-heading text-navy-950">
+                        {s.name}
+                      </h3>
+                      <div className="text-xs text-charcoal-500 flex items-center space-x-1 mt-1">
+                        <MapPin className="w-3.5 h-3.5 text-emergency-600 flex-shrink-0" />
+                        <span>{s.location}</span>
+                      </div>
+                    </div>
+
+                    {/* Capacity Progress Bar */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-semibold text-navy-950">
+                        <span>Capacity: {s.current_occupancy} / {totalCap} occupied</span>
+                        <span className="font-mono text-charcoal-600">{occupancyPct}%</span>
+                      </div>
+                      <div className="w-full bg-charcoal-100 h-2 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all ${
+                            isFull ? 'bg-emergency-600' : occupancyPct > 80 ? 'bg-amber-500' : 'bg-emerald-600'
+                          }`}
+                          style={{ width: `${occupancyPct}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    {/* Amenities Badges */}
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {s.family_area && (
+                        <span className="text-[10px] bg-purple-50 text-purple-700 font-semibold px-2 py-0.5 rounded border border-purple-200">
+                          Family Quarters
+                        </span>
+                      )}
+                      {(s.medical_support || s.medical_station) && (
+                        <span className="text-[10px] bg-red-50 text-red-700 font-semibold px-2 py-0.5 rounded border border-red-200">
+                          First Aid Clinic
+                        </span>
+                      )}
+                      {(s.power_backup || s.accessibility_support) && (
+                        <span className="text-[10px] bg-amber-50 text-amber-800 font-semibold px-2 py-0.5 rounded border border-amber-200">
+                          Accessible / Backup
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Resource Buffers */}
+                    <div className="grid grid-cols-2 gap-2 text-[11px] text-charcoal-600 bg-charcoal-50 p-2.5 rounded-xl border border-charcoal-100">
+                      <div>
+                        Water: <strong>{waterAmt}L</strong>
+                      </div>
+                      <div>
+                        Rations: <strong>{foodDays} Days</strong>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Amenity Badges */}
-                <div className="flex flex-wrap gap-1.5 text-[11px] font-medium text-charcoal-600 mb-4">
-                  {shelter.family_area && <span className="bg-charcoal-100 px-2 py-0.5 rounded">Family Quarters</span>}
-                  {shelter.medical_support && <span className="bg-charcoal-100 px-2 py-0.5 rounded">Medical Desk</span>}
-                  {shelter.accessibility_support && <span className="bg-charcoal-100 px-2 py-0.5 rounded">Wheelchair Access</span>}
+                {/* Footer Action */}
+                <div className="p-6 pt-0">
+                  <Link
+                    to="/emergency-map"
+                    className="w-full flex items-center justify-center space-x-2 bg-navy-950 hover:bg-navy-900 text-white font-bold py-3 rounded-xl text-xs transition-colors"
+                  >
+                    <span>View Location on Live Map</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
-              </div>
 
-              <div className="pt-3 border-t border-charcoal-100 flex items-center justify-between text-xs">
-                <span className="text-charcoal-400 text-[11px]">Free emergency admission</span>
-                <button
-                  onClick={() => alert(`Directions for ${shelter.name}: Located at ${shelter.location}. Emergency hotline available.`)}
-                  className="font-bold text-navy-900 hover:text-emergency-600 transition-colors"
-                >
-                  Get Directions &rarr;
-                </button>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </section>
 
     </div>
   );
