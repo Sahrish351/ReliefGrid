@@ -344,3 +344,4 @@ export interface EmergencyZone {
   synthetic_demo: boolean;
   active_incidents_count: number;
 }
+
