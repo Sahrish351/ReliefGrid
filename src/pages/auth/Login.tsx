@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Mail, ArrowRight, ShieldCheck, Radio, Sparkles } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../types';
 import { IMAGES, handleImageError } from '../../config/images';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+
   const [email, setEmail] = useState('coordinator@reliefgrid.ai');
   const [password, setPassword] = useState('password123');
   const [selectedRole, setSelectedRole] = useState<UserRole>('emergency_coordinator');
@@ -35,6 +37,7 @@ export const Login: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+
     const res = await login(email, password, selectedRole);
     setIsLoading(false);
 
@@ -43,21 +46,41 @@ export const Login: React.FC = () => {
       return;
     }
 
-    // Redirect to corresponding role portal
-    if (selectedRole === 'emergency_coordinator') navigate('/portal/coordinator');
-    else if (selectedRole === 'citizen') navigate('/portal/citizen');
-    else if (selectedRole === 'responder') navigate('/portal/responder');
-    else if (selectedRole === 'hospital_staff') navigate('/portal/hospital');
-    else if (selectedRole === 'shelter_manager') navigate('/portal/shelter');
-    else if (selectedRole === 'organization_admin') navigate('/portal/ngo');
-    else if (selectedRole === 'volunteer') navigate('/portal/volunteer');
-    else navigate('/portal/admin');
+    // Role-based portal redirect strictly conforming to requirement
+    switch (selectedRole) {
+      case 'emergency_coordinator':
+        navigate('/portal/coordinator');
+        break;
+      case 'citizen':
+        navigate('/portal/citizen');
+        break;
+      case 'responder':
+        navigate('/portal/responder');
+        break;
+      case 'hospital_staff':
+        navigate('/portal/hospital');
+        break;
+      case 'shelter_manager':
+        navigate('/portal/shelter');
+        break;
+      case 'organization_admin':
+        navigate('/portal/organization');
+        break;
+      case 'volunteer':
+        navigate('/portal/volunteer');
+        break;
+      case 'super_admin':
+        navigate('/portal/admin');
+        break;
+      default:
+        navigate('/portal/citizen');
+    }
   };
 
   return (
-    <div className="min-h-[85vh] flex items-stretch">
+    <div className="min-h-screen flex items-stretch bg-white">
       
-      {/* Left Column: Authentic Humanitarian Photography (Editorial Split) */}
+      {/* Left Column: Authentic Humanitarian Photography (Editorial Split on Desktop) */}
       <div className="hidden lg:block lg:w-1/2 relative bg-navy-950 overflow-hidden">
         <img
           src={IMAGES.commandCenter}
@@ -86,33 +109,45 @@ export const Login: React.FC = () => {
       </div>
 
       {/* Right Column: Clean Authentication Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-16 bg-white">
-        <div className="max-w-md w-full space-y-8">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-16 bg-white min-h-screen">
+        <div className="max-w-md w-full space-y-7">
           
-          <div className="space-y-2">
-            <Link to="/" className="inline-flex items-center space-x-2 mb-2 group">
+          {/* Logo Mark */}
+          <div>
+            <Link to="/" className="inline-flex items-center space-x-2.5 mb-4 group">
+              <div className="w-8 h-8 rounded-lg bg-navy-950 flex items-center justify-center text-white shadow-xs group-hover:bg-navy-900 transition-colors">
+                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="18" height="18" x="3" y="3" rx="2" />
+                  <path d="M3 9h18" />
+                  <path d="M9 21V9" />
+                  <circle cx="15" cy="15" r="2.5" fill="#D92D20" stroke="none" />
+                </svg>
+              </div>
               <span className="font-heading font-black text-2xl text-navy-950 tracking-tight group-hover:text-emergency-600 transition-colors">
                 RELIEFGRID
               </span>
             </Link>
-            <h1 className="text-3xl font-black font-heading text-navy-950 tracking-tight">
-              Sign In to Your Portal
+
+            <h1 className="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">
+              Welcome back
             </h1>
-            <p className="text-xs sm:text-sm text-charcoal-600">
-              Select your simulated role profile to access corresponding operations.
+            <p className="text-xs sm:text-sm text-charcoal-600 mt-1">
+              Sign in to continue to RELIEFGRID.
             </p>
           </div>
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
-              {error}
+            <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium flex items-center space-x-2">
+              <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+              <span>{error}</span>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5 text-xs">
+          <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            {/* Role Profile Selector (Demo helper allowing test of all 8 roles) */}
             <div>
               <label className="block font-bold text-navy-950 uppercase tracking-wider text-[11px] mb-1.5">
-                Active Operational Role Profile
+                Operational Role Profile
               </label>
               <select
                 value={selectedRole}
@@ -130,56 +165,90 @@ export const Login: React.FC = () => {
               </select>
             </div>
 
+            {/* Email Field */}
             <div>
               <label className="block font-bold text-navy-950 uppercase tracking-wider text-[11px] mb-1.5">
-                Operational Email
+                Email
               </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-3 text-xs sm:text-sm text-navy-950 focus:outline-none focus:border-navy-950"
-              />
+              <div className="relative">
+                <Mail className="w-4 h-4 text-charcoal-400 absolute left-3.5 top-3.5 flex-shrink-0" />
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@agency.org"
+                  className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl py-3 pl-10 pr-3.5 text-xs sm:text-sm text-navy-950 focus:outline-none focus:border-navy-950 focus:bg-white"
+                />
+              </div>
             </div>
 
+            {/* Password Field */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="font-bold text-navy-950 uppercase tracking-wider text-[11px]">
+                <label className="block font-bold text-navy-950 uppercase tracking-wider text-[11px]">
                   Password
                 </label>
-                <Link to="/forgot-password" className="text-xs text-emergency-600 hover:underline">
+                <Link
+                  to="/forgot-password"
+                  className="text-[11px] font-semibold text-charcoal-600 hover:text-navy-950 transition-colors"
+                >
                   Forgot password?
                 </Link>
               </div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-3 text-xs sm:text-sm text-navy-950 focus:outline-none focus:border-navy-950"
-              />
+              <div className="relative">
+                <Lock className="w-4 h-4 text-charcoal-400 absolute left-3.5 top-3.5 flex-shrink-0" />
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl py-3 pl-10 pr-3.5 text-xs sm:text-sm text-navy-950 focus:outline-none focus:border-navy-950 focus:bg-white"
+                />
+              </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-navy-950 hover:bg-navy-900 active:scale-95 text-white font-extrabold py-3.5 rounded-xl text-sm shadow-card flex items-center justify-center space-x-2 transition-all disabled:opacity-50"
-            >
-              <span>{isLoading ? 'Authenticating Profile...' : 'Enter Operational Portal'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            {/* Submit Button */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-emergency-600 hover:bg-emergency-700 active:scale-98 text-white font-extrabold py-3.5 px-4 rounded-xl text-sm shadow-card flex items-center justify-center space-x-2 transition-all disabled:opacity-50"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Verifying Credentials...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>SIGN IN</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </div>
           </form>
 
-          <div className="pt-4 border-t border-charcoal-100 flex items-center justify-between text-xs text-charcoal-600">
-            <span>Need a new organization profile?</span>
-            <Link to="/register" className="font-bold text-navy-950 hover:text-emergency-600">
-              Register Account &rarr;
+          {/* Navigation to Register */}
+          <div className="pt-3 border-t border-charcoal-100 flex items-center justify-between text-xs text-charcoal-600">
+            <span>Don&apos;t have an account?</span>
+            <Link
+              to="/register"
+              className="font-bold text-navy-950 hover:text-emergency-600 transition-colors"
+            >
+              Create an account &rarr;
             </Link>
           </div>
 
-          <div className="bg-charcoal-50 p-3 rounded-xl border border-charcoal-200 text-[11px] text-charcoal-500 font-mono text-center">
-            DEMONSTRATION ACCESS &bull; PASSWORDS PRE-FILLED FOR CONVENIENCE
+          <div className="text-center pt-2">
+            <Link
+              to="/"
+              className="text-xs text-charcoal-500 hover:text-navy-950 transition-colors"
+            >
+              &larr; Return to public website
+            </Link>
           </div>
 
         </div>
@@ -188,3 +257,5 @@ export const Login: React.FC = () => {
     </div>
   );
 };
+
+export default Login;

@@ -108,67 +108,70 @@ export const Home: React.FC = () => {
         <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <div className="lg:col-span-8 space-y-7">
+            <div className="lg:col-span-8 space-y-6 sm:space-y-7">
               {/* Minimal Eyebrow */}
-              <div className="inline-flex items-center space-x-2.5 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+              <div className="inline-flex items-center space-x-2 text-[11px] sm:text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 <span>AI-POWERED EMERGENCY RESPONSE &bull; PAKISTAN DISPATCH GRID</span>
               </div>
 
-              {/* Massive Editorial Headline */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-heading text-white tracking-tight leading-[1.06]">
-                WHEN EVERY SECOND <br />
-                MATTERS, <br />
+              {/* Responsive Controlled Headline with clamp() */}
+              <h1
+                style={{ fontSize: 'clamp(2.35rem, 5vw, 5.25rem)' }}
+                className="font-black font-heading text-white tracking-tight leading-[1.08] max-w-2xl lg:max-w-3xl"
+              >
+                When Every Second<br className="inline" />
+                Matters,<br />
                 <span className="text-transparent bg-gradient-to-r from-white via-navy-100 to-emergency-400 bg-clip-text">
-                  INTELLIGENCE
-                </span> <br />
-                SHOULD MOVE FIRST.
+                  Intelligence Should
+                </span><br />
+                Move First.
               </h1>
 
               {/* Short, Punchy Supporting Paragraph */}
-              <p className="text-navy-100 text-lg sm:text-xl font-normal max-w-xl leading-relaxed">
+              <p className="text-navy-100 text-base sm:text-lg lg:text-xl font-normal max-w-xl leading-relaxed">
                 RELIEFGRID orchestrates multi-agent Gemini intelligence to turn frantic emergency calls into verified, prioritized, and human-authorized rescue operations.
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              {/* Action Buttons: Stack cleanly on mobile, side-by-side on desktop */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 w-full sm:w-auto">
                 <Link
                   to="/report-emergency"
-                  className="inline-flex items-center space-x-3 bg-emergency-600 hover:bg-emergency-700 active:scale-95 text-white font-extrabold px-8 py-4 rounded-xl text-base shadow-elevated transition-all border border-emergency-500 group"
+                  className="inline-flex items-center justify-center space-x-2.5 bg-emergency-600 hover:bg-emergency-700 active:scale-95 text-white font-extrabold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base shadow-elevated transition-all border border-emergency-500 group whitespace-nowrap"
                 >
-                  <ShieldAlert className="w-5 h-5" />
-                  <span>REPORT AN EMERGENCY</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ShieldAlert className="w-5 h-5 flex-shrink-0" />
+                  <span className="whitespace-nowrap">REPORT AN EMERGENCY</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                 </Link>
 
                 <Link
                   to="/emergency-map"
-                  className="inline-flex items-center space-x-2.5 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold px-7 py-4 rounded-xl text-base backdrop-blur-md border border-white/20 transition-all"
+                  className="inline-flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base backdrop-blur-md border border-white/20 transition-all whitespace-nowrap"
                 >
-                  <Compass className="w-5 h-5 text-emerald-400" />
-                  <span>EXPLORE RESPONSE NETWORK</span>
+                  <Compass className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                  <span className="whitespace-nowrap">EXPLORE RESPONSE NETWORK</span>
                 </Link>
               </div>
 
               {/* Subtle Trust Indicators */}
-              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-8 text-xs text-navy-200 font-medium">
+              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 sm:gap-8 text-xs text-navy-200 font-medium">
                 <span className="flex items-center space-x-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                   <span>Human-in-the-Loop Safeguard</span>
                 </span>
                 <span className="flex items-center space-x-2">
-                  <Cpu className="w-4 h-4 text-emerald-400" />
+                  <Cpu className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                   <span>10 Specialized Gemini Agents</span>
                 </span>
                 <span className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                   <span>Sub-Second Proximity Matching</span>
                 </span>
               </div>
             </div>
 
-            {/* Right: Floating Product UI Overlays */}
-            <div className="lg:col-span-4 space-y-3.5">
+            {/* Right: Floating Product UI Overlays (Stacked below on mobile) */}
+            <div className="lg:col-span-4 space-y-3.5 mt-8 lg:mt-0">
               
               <div className="bg-navy-900/90 backdrop-blur-md border border-white/20 rounded-xl p-4 text-white shadow-elevated">
                 <div className="flex items-center justify-between text-[10px] font-mono text-emerald-400 font-extrabold mb-1">

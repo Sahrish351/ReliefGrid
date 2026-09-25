@@ -47,16 +47,24 @@ import { VolunteerPortal } from './pages/volunteer/VolunteerPortal';
 import { AdminPortal } from './pages/admin/AdminPortal';
 import { IncidentDetail } from './pages/incident/IncidentDetail';
 
-// Public Layout Wrapper with Navigation & Footer
+// Public Layout Wrapper with Navigation & Footer (NO top bar, begins with Navbar)
 const PublicLayout: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-charcoal-900 font-sans">
-      <DemoBanner />
       <Navbar />
       <main className="flex-1">
         <Outlet />
       </main>
       <Footer />
+    </div>
+  );
+};
+
+// Standalone Authentication Layout (NO public navbar, NO public footer)
+const AuthLayout: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center">
+      <Outlet />
     </div>
   );
 };
@@ -67,7 +75,7 @@ export const App: React.FC = () => {
       <AuthProvider>
         <DataProvider>
           <Routes>
-            {/* Public Layout Routes (Marketing & Auth) */}
+            {/* Public Layout Routes (Marketing & Citizen Exploration) */}
             <Route element={<PublicLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -89,14 +97,16 @@ export const App: React.FC = () => {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/contact" element={<Contact />} />
 
-              {/* Authentication Routes */}
+              {/* Aliases */}
+              <Route path="/request-help" element={<Navigate to="/report-emergency" replace />} />
+            </Route>
+
+            {/* Standalone Authentication Routes (Zero Navbar, Zero Footer) */}
+            <Route element={<AuthLayout />}>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-
-              {/* Aliases */}
-              <Route path="/request-help" element={<Navigate to="/report-emergency" replace />} />
             </Route>
 
             {/* Operational Dashboards (Strictly Protected by ProtectedRoute & DashboardLayout) */}
@@ -183,7 +193,7 @@ export const App: React.FC = () => {
 
             {/* NGO / Relief Organization Portal */}
             <Route
-              path="/portal/ngo"
+              path="/portal/organization"
               element={
                 <ProtectedRoute allowedRoles={['organization_admin', 'super_admin']}>
                   <DashboardLayout
@@ -195,7 +205,8 @@ export const App: React.FC = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/organization" element={<Navigate to="/portal/ngo" replace />} />
+            <Route path="/portal/ngo" element={<Navigate to="/portal/organization" replace />} />
+            <Route path="/organization" element={<Navigate to="/portal/organization" replace />} />
 
             {/* Volunteer Portal */}
             <Route
