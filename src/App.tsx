@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import { AuthProvider } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
 
-import { DemoBanner } from './components/common/DemoBanner';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
@@ -51,7 +50,6 @@ import { IncidentDetail } from './pages/incident/IncidentDetail';
 const PublicLayout: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-charcoal-900 font-sans">
-      <DemoBanner />
       <Navbar />
       <main className="flex-1">
         <Outlet />

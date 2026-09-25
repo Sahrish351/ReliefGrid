@@ -25,15 +25,15 @@ export const About: React.FC = () => {
       <section className="relative min-h-[60vh] flex items-center bg-navy-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.heroTeamwork}
-            alt="Humanitarian emergency operations coordination"
+            src={IMAGES.about.hero}
+            alt="Humanitarian emergency operations coordination team strategizing in field command"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
           <div className="max-w-3xl space-y-6">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               OUR MISSION &bull; HUMANITARIAN TECHNOLOGY
@@ -42,14 +42,14 @@ export const About: React.FC = () => {
               Built for First Responders, Vulnerable Families, and Public Safety.
             </h1>
             <p className="text-navy-100 text-lg sm:text-xl font-normal leading-relaxed">
-              RELIEFGRID AI was founded on a simple principle: when catastrophic emergencies strike, coordination should be instantaneous, transparent, and accountable to human judgment.
+              RELIEFGRID was founded on a simple principle: when catastrophic emergencies strike, coordination should be instantaneous, transparent, and accountable to human judgment.
             </p>
           </div>
         </div>
       </section>
 
       {/* 2. THE PROBLEM & WHY FRAGMENTED RESPONSE FAILS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div className="lg:col-span-6 space-y-6">
@@ -90,8 +90,8 @@ export const About: React.FC = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-navy-950 shadow-elevated">
               <img
-                src={IMAGES.logisticsWarehouse}
-                alt="Emergency logistics warehouse in Pakistan"
+                src={IMAGES.about.mission}
+                alt="Emergency field command strategy and humanitarian briefing"
                 onError={handleImageError}
                 className="w-full h-full object-cover"
               />

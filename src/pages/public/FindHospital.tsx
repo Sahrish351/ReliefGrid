@@ -41,15 +41,15 @@ export const FindHospital: React.FC = () => {
       <section className="relative min-h-[50vh] flex items-center bg-navy-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.hospitalCare}
-            alt="Emergency hospital trauma care doctors"
+            src={IMAGES.hospitals.hero}
+            alt="Emergency hospital trauma center ambulance bay and medical facilities"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               CLINICAL TRAUMA NETWORK &bull; LIVE ICU CAPACITY
@@ -108,9 +108,9 @@ export const FindHospital: React.FC = () => {
       </section>
 
       {/* 3. HOSPITAL CARDS (Spacious Editorial Cards) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredHospitals.map((h) => {
+          {filteredHospitals.map((h, idx) => {
             const hasFreeBeds = h.available_beds > 0;
             const icuCount = h.icu_beds ?? h.icu_available ?? 0;
             const hasFreeIcu = icuCount > 0;
@@ -119,6 +119,13 @@ export const FindHospital: React.FC = () => {
             const blood = h.blood_units ?? h.blood_units_available ?? 0;
             const phone = h.contact_phone || '+92 42 9923 1122';
 
+            const cardPhotos = [
+              IMAGES.hospitals.clinicalTeam,
+              IMAGES.hospitals.icuMonitoring,
+              IMAGES.hospitals.diagnostics,
+            ];
+            const cardImg = cardPhotos[idx % cardPhotos.length];
+
             return (
               <div
                 key={h.id}
@@ -126,10 +133,10 @@ export const FindHospital: React.FC = () => {
               >
                 <div>
                   {/* Photo Banner */}
-                  <div className="relative h-44 overflow-hidden bg-navy-950">
+                  <div className="relative h-48 overflow-hidden bg-navy-950">
                     <img
-                      src={IMAGES.traumaWard}
-                      alt={h.name}
+                      src={cardImg}
+                      alt={`Emergency facilities at ${h.name}`}
                       onError={handleImageError}
                       className="w-full h-full object-cover"
                     />

@@ -41,8 +41,8 @@ export const LiveNetwork: React.FC = () => {
     <div className="space-y-16 pb-24 overflow-x-hidden">
       
       {/* 1. TOP HEADER & OPERATIONAL BAR */}
-      <section className="bg-navy-950 text-white py-12 border-b border-navy-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-navy-950 text-white py-14 border-b border-navy-800">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-wrap items-center justify-between gap-6">
             <div className="space-y-2">
               <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
@@ -66,11 +66,11 @@ export const LiveNetwork: React.FC = () => {
                 <span>Report Emergency</span>
               </Link>
               <Link
-                to="/command"
+                to="/login"
                 className="bg-white hover:bg-navy-50 text-navy-950 font-bold px-6 py-3 rounded-xl text-sm shadow-card flex items-center space-x-2 transition-all"
               >
                 <Radio className="w-4 h-4 text-emerald-600" />
-                <span>Command Center</span>
+                <span>Sign In to Console</span>
               </Link>
             </div>
           </div>
@@ -78,7 +78,7 @@ export const LiveNetwork: React.FC = () => {
       </section>
 
       {/* 2. MAP & LIVE TELEMETRY SPLIT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         
         {/* City Filter Pills */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">

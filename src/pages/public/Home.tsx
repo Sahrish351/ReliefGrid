@@ -105,14 +105,14 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Hero Narrative Container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-8 space-y-7">
               {/* Minimal Eyebrow */}
               <div className="inline-flex items-center space-x-2.5 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>AI-POWERED EMERGENCY RESPONSE &bull; PAKISTAN DISPATCH GRID</span>
+                <span>EMERGENCY RESPONSE &bull; PAKISTAN DISPATCH GRID</span>
               </div>
 
               {/* Massive Editorial Headline */}
@@ -127,7 +127,7 @@ export const Home: React.FC = () => {
 
               {/* Short, Punchy Supporting Paragraph */}
               <p className="text-navy-100 text-lg sm:text-xl font-normal max-w-xl leading-relaxed">
-                RELIEFGRID AI orchestrates multi-agent Gemini intelligence to turn frantic emergency calls into verified, prioritized, and human-authorized rescue operations.
+                RELIEFGRID orchestrates multi-agent Gemini intelligence to turn frantic emergency calls into verified, prioritized, and human-authorized rescue operations.
               </p>
 
               {/* Action Buttons */}
@@ -506,8 +506,8 @@ export const Home: React.FC = () => {
             <div className="space-y-4">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-navy-950 shadow-card">
                 <img
-                  src={IMAGES.shelterCommunity}
-                  alt="Community shelter safe space"
+                  src={IMAGES.home.storyChildren}
+                  alt="Community shelter support for vulnerable families and children"
                   onError={handleImageError}
                   className="w-full h-full object-cover"
                 />
@@ -785,14 +785,14 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 13. FINAL CINEMATIC CTA (Powerful Ending, Full-Width Photo, Open Text)    */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="relative rounded-3xl overflow-hidden bg-navy-950 min-h-[460px] flex items-center justify-center p-8 sm:p-16 text-center shadow-elevated">
           
           {/* Background Photo */}
           <div className="absolute inset-0 z-0">
             <img
-              src={IMAGES.communitySafety}
-              alt="Humanitarian volunteers working with affected families"
+              src={IMAGES.home.finalCta}
+              alt="Humanitarian hands of hope and emergency solidarity"
               onError={handleImageError}
               className="w-full h-full object-cover opacity-25"
             />
@@ -809,7 +809,7 @@ export const Home: React.FC = () => {
             </h2>
 
             <p className="text-navy-200 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-              Whether you are an affected citizen requesting emergency extraction, a first responder, an NGO coordinator, or a hospital chief, RELIEFGRID AI coordinates your efforts in real time.
+              Whether you are an affected citizen requesting emergency extraction, a first responder, an NGO coordinator, or a hospital chief, RELIEFGRID coordinates your efforts in real time.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">

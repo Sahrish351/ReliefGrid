@@ -47,15 +47,15 @@ export const FindShelter: React.FC = () => {
       <section className="relative min-h-[50vh] flex items-center bg-navy-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.shelterCommunity}
-            alt="Evacuation shelter community in Pakistan"
+            src={IMAGES.shelters.hero}
+            alt="Humanitarian emergency shelter encampment and relief ground"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               SAFE HARBOR DIRECTORY &bull; LIVE CAPACITY
@@ -71,7 +71,7 @@ export const FindShelter: React.FC = () => {
       </section>
 
       {/* 2. SEARCH & FILTER CONSOLE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="bg-white border border-charcoal-200 rounded-2xl p-5 shadow-card space-y-4">
           
           <div className="flex flex-col lg:flex-row items-center gap-4">
@@ -137,15 +137,22 @@ export const FindShelter: React.FC = () => {
       </section>
 
       {/* 3. SHELTER CARDS (Rich, Visual, Not a Database Table) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredShelters.map((s) => {
+          {filteredShelters.map((s, idx) => {
             const totalCap = s.total_capacity || s.capacity || 200;
             const freeSlots = Math.max(0, totalCap - s.current_occupancy);
             const occupancyPct = Math.round((s.current_occupancy / totalCap) * 100);
             const isFull = occupancyPct >= 95;
             const waterAmt = s.water_supply_liters || (s.water_hours_remaining ? s.water_hours_remaining * 25 : 1200);
             const foodDays = s.food_supply_days || (s.food_hours_remaining ? Math.round(s.food_hours_remaining / 24) : 5);
+
+            const shelterPhotos = [
+              IMAGES.shelters.accommodation,
+              IMAGES.shelters.rations,
+              IMAGES.shelters.welfare,
+            ];
+            const cardImg = shelterPhotos[idx % shelterPhotos.length];
 
             return (
               <div
@@ -154,10 +161,10 @@ export const FindShelter: React.FC = () => {
               >
                 <div>
                   {/* Photo Banner */}
-                  <div className="relative h-44 overflow-hidden bg-navy-950">
+                  <div className="relative h-48 overflow-hidden bg-navy-950">
                     <img
-                      src={IMAGES.shelterInterior}
-                      alt={s.name}
+                      src={cardImg}
+                      alt={`Accommodation at ${s.name}`}
                       onError={handleImageError}
                       className="w-full h-full object-cover"
                     />
