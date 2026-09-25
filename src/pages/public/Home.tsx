@@ -105,14 +105,14 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Hero Narrative Container */}
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24 w-full">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-8 space-y-7">
               {/* Minimal Eyebrow */}
               <div className="inline-flex items-center space-x-2.5 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>EMERGENCY RESPONSE &bull; PAKISTAN DISPATCH GRID</span>
+                <span>AI-POWERED EMERGENCY RESPONSE &bull; PAKISTAN DISPATCH GRID</span>
               </div>
 
               {/* Massive Editorial Headline */}
@@ -215,7 +215,7 @@ export const Home: React.FC = () => {
       {/* 2. TRUST / NETWORK STRIP (Clean Horizontal, Open Typography, No Big Cards) */}
       {/* ========================================================================= */}
       <section className="border-y border-charcoal-200/80 bg-white py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center">
             {[
               { label: 'Emergency Response', sub: 'Rescue 1122 & USAR', icon: LifeBuoy },
@@ -243,7 +243,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 3. THE REAL-WORLD PROBLEM (Editorial Split, Whitespace, Open Layout)      */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Large Humanitarian Image (Editorial Bleed) */}
@@ -300,7 +300,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 4. HOW RELIEFGRID WORKS (Horizontal Process, Typography & Connecting Lines)*/}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="max-w-2xl mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-2">
@@ -358,21 +358,21 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 5. AI ORCHESTRATION (One Emergency. Ten Intelligent Agents.)               */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <AIOrchestratorVisual />
       </section>
 
       {/* ========================================================================= */}
       {/* 6. SIGNATURE DEMO (Full-Width Interactive System Simulator)               */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <AISimulator />
       </section>
 
       {/* ========================================================================= */}
       {/* 7. LIVE PAKISTAN RESPONSE NETWORK (Immersive Wide Leaflet Map)            */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 space-y-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 mb-1">
@@ -444,7 +444,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 8. HUMAN STORIES / HUMAN IMPACT (Warm Editorial Layout with Real Photos)   */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="max-w-2xl mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-emergency-600 mb-2">
@@ -506,8 +506,8 @@ export const Home: React.FC = () => {
             <div className="space-y-4">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-navy-950 shadow-card">
                 <img
-                  src={IMAGES.home.storyChildren}
-                  alt="Community shelter support for vulnerable families and children"
+                  src={IMAGES.shelterCommunity}
+                  alt="Community shelter safe space"
                   onError={handleImageError}
                   className="w-full h-full object-cover"
                 />
@@ -530,7 +530,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 9. EMERGENCY RESPONSE PROTOCOLS (Large Editorial Image Tiles)             */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
             <div>
@@ -589,7 +589,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 10. CONNECTED RESPONSE NETWORK (Visual Open Flow Diagram)                 */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-1">
@@ -654,7 +654,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 11. PREDICTIVE INTELLIGENCE (Editorial Analytical Section, Not a Dark Box) */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -716,7 +716,7 @@ export const Home: React.FC = () => {
       {/* ========================================================================= */}
       {/* 12. IMPACT (Large Typography Metrics, Open, With Synthetic Label)          */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="text-center max-w-xl mx-auto mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600">
@@ -791,8 +791,8 @@ export const Home: React.FC = () => {
           {/* Background Photo */}
           <div className="absolute inset-0 z-0">
             <img
-              src={IMAGES.home.finalCta}
-              alt="Humanitarian hands of hope and emergency solidarity"
+              src={IMAGES.communitySafety}
+              alt="Humanitarian volunteers working with affected families"
               onError={handleImageError}
               className="w-full h-full object-cover opacity-25"
             />
@@ -809,7 +809,7 @@ export const Home: React.FC = () => {
             </h2>
 
             <p className="text-navy-200 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-              Whether you are an affected citizen requesting emergency extraction, a first responder, an NGO coordinator, or a hospital chief, RELIEFGRID coordinates your efforts in real time.
+              Whether you are an affected citizen requesting emergency extraction, a first responder, an NGO coordinator, or a hospital chief, RELIEFGRID AI coordinates your efforts in real time.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">

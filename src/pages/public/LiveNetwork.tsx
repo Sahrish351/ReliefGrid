@@ -41,7 +41,7 @@ export const LiveNetwork: React.FC = () => {
     <div className="space-y-16 pb-24 overflow-x-hidden">
       
       {/* 1. TOP HEADER & OPERATIONAL BAR */}
-      <section className="bg-navy-950 text-white py-14 border-b border-navy-800">
+      <section className="bg-navy-950 text-white py-12 border-b border-navy-800">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-wrap items-center justify-between gap-6">
             <div className="space-y-2">
@@ -70,7 +70,7 @@ export const LiveNetwork: React.FC = () => {
                 className="bg-white hover:bg-navy-50 text-navy-950 font-bold px-6 py-3 rounded-xl text-sm shadow-card flex items-center space-x-2 transition-all"
               >
                 <Radio className="w-4 h-4 text-emerald-600" />
-                <span>Sign In to Console</span>
+                <span>Authorized Sign In</span>
               </Link>
             </div>
           </div>
@@ -205,7 +205,7 @@ export const LiveNetwork: React.FC = () => {
       </section>
 
       {/* 3. COMPLETE RESPONSE NETWORK: 8 STAKEHOLDER PILLARS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="max-w-2xl mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-2">

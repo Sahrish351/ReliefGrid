@@ -61,7 +61,7 @@ export const Impact: React.FC = () => {
       <section className="relative min-h-[55vh] flex items-center bg-navy-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.impactHope}
+            src={IMAGES.impact.hero}
             alt="Humanitarian community impact in Pakistan"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
@@ -69,7 +69,7 @@ export const Impact: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               OPERATIONAL PERFORMANCE &bull; VERIFIED OUTCOMES
@@ -85,7 +85,7 @@ export const Impact: React.FC = () => {
       </section>
 
       {/* 2. LARGE TYPOGRAPHY METRICS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="text-center max-w-xl mx-auto mb-12">
           <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600">
             CUMULATIVE BENCHMARKS
@@ -150,7 +150,7 @@ export const Impact: React.FC = () => {
       </section>
 
       {/* 3. ANALYTICAL CHARTS (Visual Recharts) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* Left Chart: 24h Incident Velocity */}
@@ -209,7 +209,7 @@ export const Impact: React.FC = () => {
       </section>
 
       {/* 4. STORYTELLING IMPACT VIGNETTES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="max-w-2xl mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-1">

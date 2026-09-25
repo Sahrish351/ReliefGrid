@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { UserCheck, CheckCircle2, Shield, Heart, MapPin, Sparkles } from 'lucide-react';
 import { useData } from '../../context/DataContext';
-import { IMAGES, handleImageError } from '../../config/images';
 
 export const Volunteer: React.FC = () => {
   const { volunteers } = useData();
@@ -41,38 +40,23 @@ export const Volunteer: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16 pb-24 overflow-x-hidden">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       
-      {/* Cinematic Hero */}
-      <section className="relative min-h-[45vh] flex items-center bg-navy-950 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={IMAGES.volunteers.hero}
-            alt="Humanitarian volunteer corps organizing for emergency relief"
-            onError={handleImageError}
-            className="w-full h-full object-cover filter brightness-85"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
+      {/* Header */}
+      <div className="text-center max-w-2xl mx-auto">
+        <div className="inline-flex items-center space-x-2 bg-navy-100 text-navy-900 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+          <Heart className="w-3.5 h-3.5 text-emergency-600" />
+          <span>Community Humanitarian Network</span>
         </div>
+        <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-navy-950">
+          Join the RELIEFGRID Volunteer Corps
+        </h1>
+        <p className="text-charcoal-600 text-sm mt-2">
+          Stand alongside professional rescue teams. Offer specialized skills, logistics support, translation, or community care during humanitarian crises across Pakistan.
+        </p>
+      </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-16 lg:py-20 w-full">
-          <div className="max-w-2xl space-y-4">
-            <div className="inline-flex items-center space-x-2 bg-navy-900/80 border border-navy-800 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider font-mono">
-              <Heart className="w-3.5 h-3.5 text-emergency-500" />
-              <span>Community Humanitarian Network</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight leading-tight">
-              Join the RELIEFGRID Volunteer Corps.
-            </h1>
-            <p className="text-navy-100 text-base sm:text-lg leading-relaxed">
-              Stand alongside professional rescue teams. Offer specialized clinical skills, logistics support, translation, or community care during humanitarian crises across Pakistan.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
         {/* Left: Application Form */}
         <div className="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-charcoal-200 shadow-card">
@@ -223,10 +207,9 @@ export const Volunteer: React.FC = () => {
             </div>
           </div>
         </div>
+
       </div>
+
     </div>
-  </div>
   );
 };
-
-export default Volunteer;

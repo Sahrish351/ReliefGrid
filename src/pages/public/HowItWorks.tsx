@@ -111,21 +111,21 @@ export const HowItWorks: React.FC = () => {
       <section className="relative min-h-[55vh] flex items-center bg-navy-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.floodBoat}
-            alt="Rescue boat navigating high water flood zone"
+            src={IMAGES.howItWorks.hero}
+            alt="Crisis response team analyzing emergency workflow pipeline"
             onError={handleImageError}
-            className="w-full h-full object-cover filter brightness-85"
+            className="w-full h-full object-cover filter brightness-80"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-6">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               OPERATIONAL LIFECYCLE &bull; STANDARD OPERATING PROTOCOL
             </div>
             <h1 className="text-4xl sm:text-6xl font-black font-heading text-white tracking-tight leading-[1.08]">
-              How RELIEFGRID AI Works: From Distress Cry to Safe Harbor.
+              How RELIEFGRID Works: From Distress Cry to Safe Harbor.
             </h1>
             <p className="text-navy-100 text-lg sm:text-xl font-normal leading-relaxed">
               Explore the 10-step verified lifecycle showing how Gemini multi-agent intelligence structures chaos into life-saving operational certainty.
@@ -135,7 +135,7 @@ export const HowItWorks: React.FC = () => {
       </section>
 
       {/* 2. THE 10-STEP VISUAL JOURNEY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="space-y-8">
           
           <div className="border-b border-charcoal-200 pb-6">
@@ -205,7 +205,7 @@ export const HowItWorks: React.FC = () => {
       </section>
 
       {/* 3. FINAL CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16 text-center max-w-2xl mx-auto space-y-6">
           <h2 className="text-3xl sm:text-4xl font-black font-heading text-navy-950">
             Ready to test the operational pipeline?

@@ -12,6 +12,10 @@ import {
   Sparkles,
   Droplet,
   Bed,
+  Building2,
+  Stethoscope,
+  Clock,
+  Compass,
 } from 'lucide-react';
 import { IMAGES, handleImageError } from '../../config/images';
 import { useData } from '../../context/DataContext';
@@ -34,6 +38,13 @@ export const FindHospital: React.FC = () => {
     return true;
   });
 
+  const cardImages = [
+    IMAGES.hospitals.clinicalTeam,
+    IMAGES.hospitals.icuMonitoring,
+    IMAGES.hospitals.diagnostics,
+    IMAGES.hospitals.hero,
+  ];
+
   return (
     <div className="space-y-28 sm:space-y-36 pb-24 overflow-x-hidden">
       
@@ -42,14 +53,14 @@ export const FindHospital: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.hospitals.hero}
-            alt="Emergency hospital trauma center ambulance bay and medical facilities"
+            alt="Emergency hospital trauma care doctors and clinical staff"
             onError={handleImageError}
-            className="w-full h-full object-cover filter brightness-85"
+            className="w-full h-full object-cover filter brightness-80"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               CLINICAL TRAUMA NETWORK &bull; LIVE ICU CAPACITY
@@ -64,8 +75,61 @@ export const FindHospital: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. SEARCH & CITY FILTER CONSOLE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. EMERGENCY & ICU CAPACITY OVERVIEW */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-navy-950 font-heading">
+              1,420
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Total Emergency Beds
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Monitored across 6 medical centers
+            </div>
+          </div>
+
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-heading">
+              84
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Available ICU Beds
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Critical care &bull; Ready for admission
+            </div>
+          </div>
+
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-navy-950 font-heading">
+              46
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Ventilators On Standby
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Invasive &bull; Pre-calibrated
+            </div>
+          </div>
+
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-emergency-600 font-heading">
+              100%
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Pre-Alert Synchronization
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Ambulance ETA to triage bay
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. SEARCH & CITY FILTER CONSOLE */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="bg-white border border-charcoal-200 rounded-2xl p-5 shadow-card space-y-4">
           
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -101,30 +165,23 @@ export const FindHospital: React.FC = () => {
 
           <div className="flex items-center justify-between text-xs text-charcoal-500 pt-2 border-t border-charcoal-100 font-mono">
             <span>Showing {filteredHospitals.length} tertiary care facilities</span>
-            <span>Real-time pre-alert link active &bull; Synthetic demo data</span>
+            <span>Real-time pre-alert link active &bull; Synthetic demonstration telemetry</span>
           </div>
 
         </div>
       </section>
 
-      {/* 3. HOSPITAL CARDS (Spacious Editorial Cards) */}
+      {/* 4. HOSPITAL CARDS WITH DIVERSE HIGH-RES PHOTOGRAPHY */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredHospitals.map((h, idx) => {
-            const hasFreeBeds = h.available_beds > 0;
             const icuCount = h.icu_beds ?? h.icu_available ?? 0;
             const hasFreeIcu = icuCount > 0;
             const traumaStatus = h.trauma_level || h.emergency_status.replace('_', ' ').toUpperCase();
             const vents = h.ventilators ?? h.ventilators_available ?? 0;
             const blood = h.blood_units ?? h.blood_units_available ?? 0;
             const phone = h.contact_phone || '+92 42 9923 1122';
-
-            const cardPhotos = [
-              IMAGES.hospitals.clinicalTeam,
-              IMAGES.hospitals.icuMonitoring,
-              IMAGES.hospitals.diagnostics,
-            ];
-            const cardImg = cardPhotos[idx % cardPhotos.length];
+            const cardImg = cardImages[idx % cardImages.length];
 
             return (
               <div
@@ -132,15 +189,15 @@ export const FindHospital: React.FC = () => {
                 className="bg-white border border-charcoal-200 rounded-3xl overflow-hidden shadow-card hover:shadow-elevated transition-all flex flex-col justify-between"
               >
                 <div>
-                  {/* Photo Banner */}
+                  {/* Photo Banner with Non-Duplicate Photography */}
                   <div className="relative h-48 overflow-hidden bg-navy-950">
                     <img
                       src={cardImg}
-                      alt={`Emergency facilities at ${h.name}`}
+                      alt={`Emergency department operations at ${h.name}`}
                       onError={handleImageError}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover filter brightness-90 hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-transparent to-transparent"></div>
 
                     <div className="absolute top-3 left-3">
                       <span className="bg-navy-950/80 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded">
@@ -197,7 +254,7 @@ export const FindHospital: React.FC = () => {
                 <div className="p-6 pt-0">
                   <Link
                     to="/emergency-map"
-                    className="w-full flex items-center justify-center space-x-2 bg-navy-950 hover:bg-navy-900 text-white font-bold py-3 rounded-xl text-xs transition-colors"
+                    className="w-full flex items-center justify-center space-x-2 bg-navy-950 hover:bg-navy-900 text-white font-bold py-3 rounded-xl text-xs transition-colors shadow-subtle"
                   >
                     <span>View Hospital on Live Map</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -210,6 +267,69 @@ export const FindHospital: React.FC = () => {
         </div>
       </section>
 
+      {/* 5. AI REFERRAL COORDINATION SECTION */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="bg-navy-950 rounded-3xl p-8 sm:p-12 text-white border border-navy-800">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>INTELLIGENT CLINICAL TRIAGE</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black font-heading tracking-tight">
+                How AI Directs Inbound Emergency Referrals.
+              </h2>
+              <p className="text-navy-200 text-sm sm:text-base leading-relaxed">
+                Rather than overloading the closest emergency ward, RELIEFGRID models real-time highway inundation, specialized neurotrauma/pediatric capabilities, and open ICU capacity. Paramedics receive destination locks before setting off.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-navy-300">
+                <span>&bull; Automated Bed Reservations</span>
+                <span>&bull; Blood Type Pre-Matching</span>
+                <span>&bull; Zero Hospital Bottlenecks</span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <Link
+                to="/emergency-map"
+                className="inline-flex items-center space-x-2 bg-emergency-600 hover:bg-emergency-700 text-white font-bold px-6 py-4 rounded-xl text-sm shadow-card transition-all"
+              >
+                <Compass className="w-4 h-4" />
+                <span>Open Emergency GIS Map</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FINAL CTA */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="border-t border-charcoal-200 pt-16 text-center max-w-2xl mx-auto space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-black font-heading text-navy-950">
+            Are you a hospital trauma administrator?
+          </h2>
+          <p className="text-charcoal-600 text-sm">
+            Sign in to your clinical staff console to manage bed capacity telemetry, verify ambulance inbounds, and accept emergency referrals.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/login"
+              className="bg-navy-950 hover:bg-navy-900 text-white font-bold px-6 py-3.5 rounded-xl text-sm shadow-card"
+            >
+              Sign In to Hospital Portal
+            </Link>
+            <Link
+              to="/contact"
+              className="bg-white border border-charcoal-200 text-navy-950 font-bold px-6 py-3.5 rounded-xl text-sm hover:bg-charcoal-50"
+            >
+              Contact Hospital Integration Desk
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
+
+export default FindHospital;

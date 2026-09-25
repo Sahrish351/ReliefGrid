@@ -36,21 +36,21 @@ export const Resources: React.FC = () => {
       title: 'Monsoon Flood Swiftwater Navigation Manual',
       category: 'First Response',
       format: 'PDF SOP &bull; 2.4 MB',
-      image: IMAGES.resources.manualDoc,
+      image: IMAGES.emergencies.flood,
       desc: 'Standard operating manual for shallow-water zodiacs navigating urban flash flood debris and underwater obstacles.',
     },
     {
       title: '72-Hour Family Disaster Evacuation Guide',
       category: 'Emergency Preparedness',
       format: 'Urdu &amp; English &bull; 1.8 MB',
-      image: IMAGES.safety.hero,
+      image: IMAGES.safety.firstAid,
       desc: 'Practical packing checklist and emergency communication plan for households in high-risk river basins.',
     },
     {
       title: 'Tertiary Trauma Ward Mass-Casualty Pre-Alert Protocol',
       category: 'Medical Support',
       format: 'Clinical Protocol &bull; 3.1 MB',
-      image: IMAGES.resources.medicalDoc,
+      image: IMAGES.hospitals.clinicalTeam,
       desc: 'Guidelines for ER trauma coordinators receiving automated AI pre-alerts and hypothermia resuscitation queues.',
     },
     {
@@ -64,7 +64,7 @@ export const Resources: React.FC = () => {
       title: 'Decentralized Warehouse Inventory Balancing Rules',
       category: 'Relief Logistics',
       format: 'Technical Whitepaper &bull; 4.0 MB',
-      image: IMAGES.resources.logisticsDoc,
+      image: IMAGES.logistics.hero,
       desc: 'Algorithms and supply chain models for staging oral rehydration salts and family food rations in regional hubs.',
     },
     {
@@ -88,14 +88,14 @@ export const Resources: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.resources.hero}
-            alt="Humanitarian resource knowledge center and technical documentation"
+            alt="Humanitarian resource knowledge center and documentation"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               KNOWLEDGE CENTER &bull; STANDARD OPERATING PROTOCOLS
@@ -111,7 +111,7 @@ export const Resources: React.FC = () => {
       </section>
 
       {/* 2. CATEGORY FILTER TABS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex flex-wrap items-center gap-2 border-b border-charcoal-200 pb-4">
           {CATEGORIES.map((cat) => (
             <button
@@ -180,7 +180,7 @@ export const Resources: React.FC = () => {
       </section>
 
       {/* 4. DEVELOPER & OPEN SCHEMAS CALLOUT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="bg-navy-950 text-white rounded-3xl p-8 sm:p-12 border border-navy-800 shadow-elevated">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">

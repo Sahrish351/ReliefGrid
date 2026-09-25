@@ -139,15 +139,15 @@ export const EmergencyTypes: React.FC = () => {
       <section className="relative min-h-[50vh] flex items-center bg-navy-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={IMAGES.emergencies.hero}
-            alt="Emergency service vehicles deploying to disaster hazard zones"
+            src={IMAGES.types.storm}
+            alt="Storm and disaster response protocols"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               HAZARD PROTOCOLS &bull; OPERATIONAL READINESS
@@ -163,7 +163,7 @@ export const EmergencyTypes: React.FC = () => {
       </section>
 
       {/* 2. LARGE EDITORIAL SECTIONS FOR EACH HAZARD */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 space-y-28">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         {HAZARDS.map((h, idx) => (
           <div
             key={h.id}

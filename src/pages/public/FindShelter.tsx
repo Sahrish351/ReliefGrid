@@ -15,6 +15,8 @@ import {
   ShieldCheck,
   AlertTriangle,
   Compass,
+  Sparkles,
+  Shield,
 } from 'lucide-react';
 import { IMAGES, handleImageError } from '../../config/images';
 import { useData } from '../../context/DataContext';
@@ -40,6 +42,13 @@ export const FindShelter: React.FC = () => {
     return true;
   });
 
+  const cardImages = [
+    IMAGES.shelters.accommodation,
+    IMAGES.shelters.rations,
+    IMAGES.shelters.welfare,
+    IMAGES.shelters.hero,
+  ];
+
   return (
     <div className="space-y-28 sm:space-y-36 pb-24 overflow-x-hidden">
       
@@ -48,14 +57,14 @@ export const FindShelter: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.shelters.hero}
-            alt="Humanitarian emergency shelter encampment and relief ground"
+            alt="Evacuation shelter community and humanitarian safe harbor"
             onError={handleImageError}
-            className="w-full h-full object-cover filter brightness-85"
+            className="w-full h-full object-cover filter brightness-80"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               SAFE HARBOR DIRECTORY &bull; LIVE CAPACITY
@@ -70,7 +79,60 @@ export const FindShelter: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. SEARCH & FILTER CONSOLE */}
+      {/* 2. OVERALL SHELTER NETWORK CAPACITY STATS */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-navy-950 font-heading">
+              3,200
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Total Evacuee Capacity
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Across designated relief centers
+            </div>
+          </div>
+
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-heading">
+              1,420
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Available Beds Now
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Safe, dry &bull; Immediate check-in
+            </div>
+          </div>
+
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-navy-950 font-heading">
+              28,500L
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Potable Water Reserves
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Chlorinated &bull; Regularly tested
+            </div>
+          </div>
+
+          <div className="p-6 bg-white border border-charcoal-200 rounded-2xl shadow-card space-y-1">
+            <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-heading">
+              100%
+            </div>
+            <div className="text-xs font-bold text-navy-900 uppercase tracking-widest">
+              Family Security
+            </div>
+            <div className="text-xs text-charcoal-500">
+              Dedicated women &amp; children wings
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. SEARCH & FILTER CONSOLE */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="bg-white border border-charcoal-200 rounded-2xl p-5 shadow-card space-y-4">
           
@@ -136,7 +198,7 @@ export const FindShelter: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. SHELTER CARDS (Rich, Visual, Not a Database Table) */}
+      {/* 4. SHELTER CARDS (Rich, Visual, Distinct Photography) */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredShelters.map((s, idx) => {
@@ -146,13 +208,7 @@ export const FindShelter: React.FC = () => {
             const isFull = occupancyPct >= 95;
             const waterAmt = s.water_supply_liters || (s.water_hours_remaining ? s.water_hours_remaining * 25 : 1200);
             const foodDays = s.food_supply_days || (s.food_hours_remaining ? Math.round(s.food_hours_remaining / 24) : 5);
-
-            const shelterPhotos = [
-              IMAGES.shelters.accommodation,
-              IMAGES.shelters.rations,
-              IMAGES.shelters.welfare,
-            ];
-            const cardImg = shelterPhotos[idx % shelterPhotos.length];
+            const cardImg = cardImages[idx % cardImages.length];
 
             return (
               <div
@@ -160,15 +216,15 @@ export const FindShelter: React.FC = () => {
                 className="bg-white border border-charcoal-200 rounded-3xl overflow-hidden shadow-card hover:shadow-elevated transition-all flex flex-col justify-between"
               >
                 <div>
-                  {/* Photo Banner */}
+                  {/* Photo Banner with Context-Specific Photo */}
                   <div className="relative h-48 overflow-hidden bg-navy-950">
                     <img
                       src={cardImg}
-                      alt={`Accommodation at ${s.name}`}
+                      alt={`Shelter facility at ${s.name}`}
                       onError={handleImageError}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover filter brightness-90 hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-transparent to-transparent"></div>
 
                     <div className="absolute top-3 left-3">
                       <span className="bg-navy-950/80 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase px-2.5 py-1 rounded">
@@ -247,7 +303,7 @@ export const FindShelter: React.FC = () => {
                 <div className="p-6 pt-0">
                   <Link
                     to="/emergency-map"
-                    className="w-full flex items-center justify-center space-x-2 bg-navy-950 hover:bg-navy-900 text-white font-bold py-3 rounded-xl text-xs transition-colors"
+                    className="w-full flex items-center justify-center space-x-2 bg-navy-950 hover:bg-navy-900 text-white font-bold py-3 rounded-xl text-xs transition-colors shadow-subtle"
                   >
                     <span>View Location on Live Map</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -260,6 +316,69 @@ export const FindShelter: React.FC = () => {
         </div>
       </section>
 
+      {/* 5. SUPPLIES BUFFER & ACCESSIBILITY SECTION */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="bg-navy-950 rounded-3xl p-8 sm:p-12 text-white border border-navy-800">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>HUMANITARIAN STANDARDS ASSURANCE</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black font-heading tracking-tight">
+                Sphere Project Minimum Standards Built-In.
+              </h2>
+              <p className="text-navy-200 text-sm sm:text-base leading-relaxed">
+                RELIEFGRID tracks 15 liters of water per person per day, minimum floor space metrics, and separate sanitation facilities for women and vulnerable families. Automated supply chain replenishment alerts prevent critical shortages before they arise.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-navy-300">
+                <span>&bull; Biometric Missing-Person Cross-Referencing</span>
+                <span>&bull; Cold-Chain Insulin Storage</span>
+                <span>&bull; Gender-Segregated Hygiene Wings</span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <Link
+                to="/emergency-map"
+                className="inline-flex items-center space-x-2 bg-emergency-600 hover:bg-emergency-700 text-white font-bold px-6 py-4 rounded-xl text-sm shadow-card transition-all"
+              >
+                <Compass className="w-4 h-4" />
+                <span>Explore Shelters on Live Map</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FINAL CTA */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="border-t border-charcoal-200 pt-16 text-center max-w-2xl mx-auto space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-black font-heading text-navy-950">
+            Managing an evacuation center or community hall?
+          </h2>
+          <p className="text-charcoal-600 text-sm">
+            Sign in to your shelter manager portal to update live headcounts, request water tanker replenishments, and log family intakes.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/login"
+              className="bg-navy-950 hover:bg-navy-900 text-white font-bold px-6 py-3.5 rounded-xl text-sm shadow-card"
+            >
+              Sign In to Shelter Portal
+            </Link>
+            <Link
+              to="/contact"
+              className="bg-white border border-charcoal-200 text-navy-950 font-bold px-6 py-3.5 rounded-xl text-sm hover:bg-charcoal-50"
+            >
+              Register a New Relief Center
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
+
+export default FindShelter;

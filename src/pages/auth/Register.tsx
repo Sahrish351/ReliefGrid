@@ -60,10 +60,9 @@ export const Register: React.FC = () => {
         <div className="max-w-md w-full space-y-8">
           
           <div className="space-y-2">
-            <Link to="/" className="inline-flex items-center space-x-2 mb-2">
-              <span className="font-heading font-black text-2xl text-navy-950 tracking-tight">RELIEFGRID</span>
-              <span className="text-[10px] font-extrabold bg-emergency-600 text-white px-2 py-0.5 rounded tracking-widest uppercase">
-                AI
+            <Link to="/" className="inline-flex items-center space-x-2 mb-2 group">
+              <span className="font-heading font-black text-2xl text-navy-950 tracking-tight group-hover:text-emergency-600 transition-colors">
+                RELIEFGRID
               </span>
             </Link>
             <h1 className="text-3xl font-black font-heading text-navy-950 tracking-tight">

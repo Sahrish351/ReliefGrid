@@ -53,14 +53,14 @@ export const SafetyCenter: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.safety.hero}
-            alt="Family evacuation preparedness drill and citizen emergency planning"
+            alt="Family emergency preparedness and evacuation safety plan"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-4">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               CITIZEN SAFETY CENTER &bull; DISASTER READINESS
@@ -76,7 +76,7 @@ export const SafetyCenter: React.FC = () => {
       </section>
 
       {/* 2. VERIFIED NATIONAL EMERGENCY CONTACTS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-b border-charcoal-200 pb-6 mb-8">
           <div className="text-xs font-mono font-bold uppercase tracking-widest text-emergency-600 mb-1">
             IMMEDIATE LIFELINES
@@ -101,7 +101,7 @@ export const SafetyCenter: React.FC = () => {
       </section>
 
       {/* 3. INTERACTIVE 72-HOUR GO-BAG CHECKLIST */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           <div className="lg:col-span-5 space-y-4 sticky top-28">
@@ -161,7 +161,7 @@ export const SafetyCenter: React.FC = () => {
       </section>
 
       {/* 4. EVACUATION GUIDANCE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="max-w-2xl mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-1">

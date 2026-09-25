@@ -19,7 +19,7 @@ export const FAQ: React.FC = () => {
   const FAQS = [
     {
       category: 'General & Prototype',
-      q: 'Is RELIEFGRID AI connected to live emergency 1122 dispatch in production?',
+      q: 'Is RELIEFGRID connected to live emergency 1122 dispatch in production?',
       a: 'This prototype operates on synthetic demonstration data modeled on actual Pakistan geography (Lahore, Karachi, Rawalpindi, Islamabad, Multan). It is built for hackathon evaluation and architectural proof-of-concept. It explicitly displays persistent disclaimers and does not trigger real-world sirens or emergency service lines.',
     },
     {
@@ -79,7 +79,7 @@ export const FAQ: React.FC = () => {
           Frequently Asked Questions
         </h1>
         <p className="text-charcoal-600 text-base leading-relaxed">
-          Detailed operational, ethical, and technical answers about RELIEFGRID AI&apos;s multi-agent architecture and emergency workflow.
+          Detailed operational, ethical, and technical answers about RELIEFGRID&apos;s multi-agent architecture and emergency workflow.
         </p>
       </div>
 

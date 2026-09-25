@@ -26,14 +26,14 @@ export const About: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.about.hero}
-            alt="Humanitarian emergency operations coordination team strategizing in field command"
+            alt="Humanitarian emergency operations coordination"
             onError={handleImageError}
             className="w-full h-full object-cover filter brightness-85"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-20">
           <div className="max-w-3xl space-y-6">
             <div className="text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
               OUR MISSION &bull; HUMANITARIAN TECHNOLOGY
@@ -91,7 +91,7 @@ export const About: React.FC = () => {
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-navy-950 shadow-elevated">
               <img
                 src={IMAGES.about.mission}
-                alt="Emergency field command strategy and humanitarian briefing"
+                alt="Emergency logistics warehouse in Pakistan"
                 onError={handleImageError}
                 className="w-full h-full object-cover"
               />
@@ -106,7 +106,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 3. OUR APPROACH: HOW AI HELPS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16">
           <div className="max-w-2xl mb-12">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600 mb-2">
@@ -155,7 +155,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 4. HUMAN-IN-THE-LOOP PHILOSOPHY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="rounded-3xl p-8 sm:p-14 bg-navy-950 text-white shadow-elevated">
           <div className="max-w-3xl space-y-6">
             <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-widest uppercase text-emerald-400">
@@ -187,7 +187,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 5. MISSION & VISION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-4">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-navy-600">OUR CHARTER</div>
@@ -208,7 +208,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 6. FINAL CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="border-t border-charcoal-200 pt-16 text-center max-w-2xl mx-auto space-y-6">
           <h2 className="text-3xl sm:text-4xl font-black font-heading text-navy-950">
             Explore the Response Architecture
