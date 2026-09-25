@@ -13,13 +13,19 @@ export const Register: React.FC = () => {
   const [password, setPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState<UserRole>('citizen');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await register(fullName, email, selectedRole);
+    setError(null);
+    const res = await register(fullName, email, password, selectedRole);
     setIsLoading(false);
-    navigate(selectedRole === 'emergency_coordinator' ? '/command' : '/app');
+    if (res.error) {
+      setError(res.error);
+    } else {
+      navigate(selectedRole === 'emergency_coordinator' ? '/portal/coordinator' : '/portal/citizen');
+    }
   };
 
   return (
@@ -67,6 +73,12 @@ export const Register: React.FC = () => {
               Join the national humanitarian emergency network.
             </p>
           </div>
+
+          {error && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4 text-xs">
             <div>

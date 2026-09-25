@@ -12,22 +12,46 @@ export const Login: React.FC = () => {
   const [password, setPassword] = useState('password123');
   const [selectedRole, setSelectedRole] = useState<UserRole>('emergency_coordinator');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const ROLE_EMAILS: Record<UserRole, string> = {
+    emergency_coordinator: 'coordinator@reliefgrid.ai',
+    citizen: 'citizen@reliefgrid.ai',
+    responder: 'responder@reliefgrid.ai',
+    hospital_staff: 'hospital@reliefgrid.ai',
+    shelter_manager: 'shelter@reliefgrid.ai',
+    organization_admin: 'ngo@reliefgrid.ai',
+    volunteer: 'volunteer@reliefgrid.ai',
+    super_admin: 'admin@reliefgrid.ai',
+  };
+
+  const handleRoleChange = (newRole: UserRole) => {
+    setSelectedRole(newRole);
+    setEmail(ROLE_EMAILS[newRole] || 'coordinator@reliefgrid.ai');
+    setPassword('password123');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await login(email, selectedRole);
+    setError(null);
+    const res = await login(email, password, selectedRole);
     setIsLoading(false);
 
+    if (res.error) {
+      setError(res.error);
+      return;
+    }
+
     // Redirect to corresponding role portal
-    if (selectedRole === 'emergency_coordinator') navigate('/command');
-    else if (selectedRole === 'citizen') navigate('/app');
-    else if (selectedRole === 'responder') navigate('/responder');
-    else if (selectedRole === 'hospital_staff') navigate('/hospital');
-    else if (selectedRole === 'shelter_manager') navigate('/shelter');
-    else if (selectedRole === 'organization_admin') navigate('/organization');
-    else if (selectedRole === 'volunteer') navigate('/volunteer/dashboard');
-    else navigate('/admin');
+    if (selectedRole === 'emergency_coordinator') navigate('/portal/coordinator');
+    else if (selectedRole === 'citizen') navigate('/portal/citizen');
+    else if (selectedRole === 'responder') navigate('/portal/responder');
+    else if (selectedRole === 'hospital_staff') navigate('/portal/hospital');
+    else if (selectedRole === 'shelter_manager') navigate('/portal/shelter');
+    else if (selectedRole === 'organization_admin') navigate('/portal/ngo');
+    else if (selectedRole === 'volunteer') navigate('/portal/volunteer');
+    else navigate('/portal/admin');
   };
 
   return (
@@ -80,6 +104,12 @@ export const Login: React.FC = () => {
             </p>
           </div>
 
+          {error && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-5 text-xs">
             <div>
               <label className="block font-bold text-navy-950 uppercase tracking-wider text-[11px] mb-1.5">
@@ -87,7 +117,7 @@ export const Login: React.FC = () => {
               </label>
               <select
                 value={selectedRole}
-                onChange={(e: any) => setSelectedRole(e.target.value)}
+                onChange={(e: any) => handleRoleChange(e.target.value as UserRole)}
                 className="w-full bg-charcoal-50 border border-charcoal-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-navy-950 focus:outline-none focus:border-navy-950"
               >
                 <option value="emergency_coordinator">Emergency Coordinator (Command Center)</option>

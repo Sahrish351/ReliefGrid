@@ -103,12 +103,17 @@ export interface Incident {
   title: string;
   description: string;
   location_text: string;
+  location_name?: string;
   city: 'Lahore' | 'Karachi' | 'Islamabad' | 'Rawalpindi' | 'Multan' | string;
   latitude: number;
   longitude: number;
+  lat?: number;
+  lng?: number;
   affected_people_count: number;
+  people_count?: number;
   priority: PriorityLevel;
   priority_score: number; // 0-100
+  severity_score?: number;
   status: IncidentStatus;
   verification_status: 'unverified' | 'verified' | 'flagged_duplicate' | 'rejected';
   immediate_danger: boolean;
@@ -117,6 +122,7 @@ export interface Incident {
   vulnerabilities: IncidentVulnerabilities;
   assigned_resource_id?: string;
   assigned_resource_name?: string;
+  assigned_resources?: string[];
   assigned_hospital_id?: string;
   assigned_hospital_name?: string;
   assigned_shelter_id?: string;
@@ -164,6 +170,7 @@ export interface Hospital {
   organization_id?: string;
   name: string;
   location: string;
+  address?: string;
   city: string;
   latitude: number;
   longitude: number;
@@ -171,6 +178,7 @@ export interface Hospital {
   available_beds: number;
   icu_beds: number;
   icu_available?: number;
+  available_icu_beds?: number;
   ventilators: number;
   ventilators_available?: number;
   blood_units: number;
@@ -321,12 +329,14 @@ export interface AIRecommendation {
     shelter_name: string;
     reason: string;
   };
-  reasoning: {
-    factors: string[];
-    affected_breakdown: string;
-    urgency_rationale: string;
-    data_points_used: string[];
-  };
+  reasoning:
+    | {
+        factors: string[];
+        affected_breakdown: string;
+        urgency_rationale: string;
+        data_points_used: string[];
+      }
+    | string;
   confidence: number;
   status: 'pending' | 'approved' | 'modified' | 'rejected';
   reviewed_by?: string;
@@ -342,6 +352,8 @@ export interface AuditLog {
   action: string;
   entity_type: string;
   entity_id: string;
+  incident_id?: string;
+  details?: string;
   metadata?: Record<string, any>;
   created_at: string;
 }

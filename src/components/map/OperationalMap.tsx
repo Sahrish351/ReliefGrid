@@ -29,15 +29,19 @@ const iconResource = createCustomIcon('#102A43', '⚓');
 const iconHospital = createCustomIcon('#039855', '+');
 const iconShelter = createCustomIcon('#7C3AED', '⌂');
 
-interface OperationalMapProps {
+export interface OperationalMapProps {
   incidents: Incident[];
   resources: Resource[];
   hospitals: Hospital[];
   shelters: Shelter[];
-  reliefHubs: ReliefHub[];
+  reliefHubs?: ReliefHub[];
   selectedCity?: string;
   height?: string;
   onSelectIncident?: (incident: Incident) => void;
+  center?: [number, number];
+  zoom?: number;
+  selectedIncidentId?: string;
+  interactive?: boolean;
 }
 
 export const OperationalMap: React.FC<OperationalMapProps> = ({
@@ -45,9 +49,14 @@ export const OperationalMap: React.FC<OperationalMapProps> = ({
   resources,
   hospitals,
   shelters,
+  reliefHubs = [],
   selectedCity: initialCity = 'Lahore',
   height = '580px',
   onSelectIncident,
+  center: centerProp,
+  zoom: zoomProp,
+  selectedIncidentId,
+  interactive = true,
 }) => {
   const [activeCity, setActiveCity] = useState(initialCity);
   const [filterType, setFilterType] = useState<string>('all');
@@ -60,7 +69,9 @@ export const OperationalMap: React.FC<OperationalMapProps> = ({
     Multan: { lat: 30.2000, lng: 71.4600, zoom: 12 },
   };
 
-  const center = CITIES_COORDS[activeCity] || CITIES_COORDS.Lahore;
+  const defaultCityCoord = CITIES_COORDS[activeCity] || CITIES_COORDS.Lahore;
+  const mapCenter: [number, number] = centerProp || [defaultCityCoord.lat, defaultCityCoord.lng];
+  const mapZoom = zoomProp || defaultCityCoord.zoom;
 
   const filteredIncidents = incidents.filter((inc) => {
     if (filterType === 'all') return true;
@@ -106,9 +117,9 @@ export const OperationalMap: React.FC<OperationalMapProps> = ({
 
       <div style={{ height }} className="w-full relative z-10">
         <MapContainer
-          key={`${activeCity}-${center.lat}-${center.lng}`}
-          center={[center.lat, center.lng]}
-          zoom={center.zoom}
+          key={`${activeCity}-${mapCenter[0]}-${mapCenter[1]}`}
+          center={mapCenter}
+          zoom={mapZoom}
           scrollWheelZoom={true}
           className="w-full h-full"
         >
